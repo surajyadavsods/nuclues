@@ -24,5 +24,6 @@ class client_group_master extends Model
         'designation2',
         'email2',
         'responsibility',
+        'responsibility2',
     ];
 }

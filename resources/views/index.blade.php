@@ -68,219 +68,93 @@
  
                      <div class="row">
 
-                        <div class="col-lg-6 mb-1 order-0">
-                           <div class="card">
-                              <div class="d-flex align-items-end row">
-                                 <div class="col-sm-7">
-                                    <div class="card-body">
-                                       <h5 class="card-title text-primary">Total Client Groups</h5>
-                                       <h1><?=count($group)?></h1>
-                                    </div>
-                                 </div>
-                                   {{--<div class="col-sm-4 text-center text-sm-left">
-                                  <div class="card-body pb-0 px-0 px-md-4">
-                                       <img src="assets/img/avatars/group.png" height="120" data-app-dark-img="illustrations/group.png" data-app-light-img="illustrations/group.png">
-                                    </div>
-                                 </div>--}}
-                              </div>
-                           </div>
-                           <br>
-                          <div class="card">
-                              <div class="d-flex align-items-end row">
-                                 <div class="col-sm-7">
-                                    <div class="card-body">
-                                       <h5 class="card-title text-primary">Total Client Entities</h5>
-                                       <h1><?=count($cliententity)?></h1>
-                                    </div>
-                                 </div>
-                                 {{--<div class="col-sm-4 text-center text-sm-left">
-                                    <div class="card-body pb-0 px-0 px-md-4">
-                                       <img src="assets/img/avatars/entity.png" height="100" style="padding-bottom:18px;" width="150" data-app-dark-img="illustrations/entity.png" data-app-light-img="illustrations/entity.png">
-                                    </div>
-                                 </div>--}}
-                              </div>
-                           </div>
-                       
-                        <br>
-                           <div class="card">
-                              <div class="d-flex align-items-end row">
-                                 <div class="col-sm-7">
-                                    <div class="card-body">
-                                       <h5 class="card-title text-primary">Total Compliance</h5>
-                                       <h1><?=count($complience)?></h1>
-                                    </div>
-                                 </div>
-                                 {{--<div class="col-sm-4 text-center text-sm-left">
-                                    <div class="card-body pb-0 px-0 px-md-4">
-                                       <img src="assets/img/avatars/country.png" height="100" style="padding-bottom:19px;" data-app-dark-img="avatars/country.png" data-app-light-img="avatars/country.png">
-                                    </div>
-                                 </div>--}}
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-3 col-md-20 col-6 mb-4">
-                                 <div class="card" style="padding-bottom:11%;">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                            {{-- <img src="assets/img/icons/unicons/wallet-info.png"  class="rounded">--}}
-                                          </div>
-                                          
-                                       </div>
-                                        <h5 class="card-title text-primary">Undue Compliance</h5>
-                                    
-                                       <h1 class="card-title text-nowrap mb-1"><?=count($undue)?></h1>
-                                    
-                                    </div>
-                                 </div>
-                            <br><br>
-                                 <div class="card" style="padding-bottom:9%;">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                       <div class="avatar flex-shrink-0">
-                                              {{--<img src="assets/img/icons/unicons/wallet-info.png"  class="rounded">>--}}
-                                          </div>
-                                          
-                                       </div>
-                                     <h5 class="card-title text-primary">Completed Compliance</h5>
-                                       <h1 class="card-title text-nowrap mb-1"><?=count($completed)?></h1>
-                                       
-                                    </div>
-                                 </div>
-                             </div>
-                             <br>
-                        <div class="col-lg-3 col-md-20 col-6 mb-4">
-                                 <div class="card" style="padding-bottom:11%;">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                             {{--<img src="assets/img/icons/unicons/wallet-info.png"  class="rounded">--}}
-                                          </div>
-                                       </div>
-                                      <h5 class="card-title text-primary">Overdue Compliance</h5>
-                                       <h1 class="card-title text-nowrap mb-1"><?=count($overdue)?></h1>
-                                    </div>
-                                 </div><br><br>
-                              <div class="card" style="padding-bottom:11%;">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                             {{--<img src="assets/img/icons/unicons/wallet-info.png"  class="rounded">--}}
-                                          </div>
-                                       </div>
-                                       <h5 class="card-title text-primary">Delayed Compliance &nbsp;</h5>
-                                       <h1 class="card-title text-nowrap mb-1"><?=count($delay)?></h1>
-                                       
-                                    </div>
-                               </div>
-                              </div>{{--
-                        <div class="col-lg-6 mb-2 order-0">
-                           <div class="card">
-                              <div class="d-flex align-items-end row">
-                                 <div class="col-sm-7">
-                                    <div class="card-body">
-                                       <h5 class="card-title text-primary">Total Compliance</h5>
-                                       <h1>3489</h1>
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-5 text-center text-sm-left">
-                                    <div class="card-body pb-0 px-0 px-md-4">
-                                       <img src="assets/img/illustrations/man-with-laptop-light.png" height="140" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png">
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>--}}
-                        {{--<div class="col-lg-3 col-md-12 order-1">
-                                 <div class="card">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                             <img src="assets/img/icons/unicons/wallet-info.png"  class="rounded">
-                                          </div>
-                                          <div class="dropdown">
-                                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                             <i class="bx bx-dots-vertical-rounded"></i>
-                                             </button>
-                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <span>Total Client Group</span>
-                                       <h3 class="card-title text-nowrap mb-1">5547</h3>
-                                       <small class="text-success fw-semibold"><i class='bx bx-up-arrow-'></i> +28.42%</small>
-                                    </div>
-                                
-                              </div>--}}
+                       <div class="col-md-2 col-6 mb-4">
+   
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="../../assets/img/icons/unicons/wallet-info.png" ="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block">Total Client Groups</span>
+            <h4 class="card-title mb-1"><?=count($group)?></h4>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-2 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="../../assets/img/icons/unicons/wallet-info.png" ="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block">Total Client Entities</span>
+            <h4 class="card-title mb-1"><?=count($cliententity)?></h4>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-2 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="../../assets/img/icons/unicons/wallet-info.png" ="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block">Total Compliance</span>
+            <h4 class="card-title mb-1"><?=count($complience)?></h4>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-2 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="../../assets/img/icons/unicons/wallet-info.png" ="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block">Undue Compliance</span>
+            <h4 class="card-title mb-1"><?=count($undue)?></h4>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-2 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="../../assets/img/icons/unicons/wallet-info.png" ="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block">Complete Compliance</span>
+            <h4 class="card-title mb-1"><?=count($completed)?></h4>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-2 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="../../assets/img/icons/unicons/wallet-info.png" ="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block">Overdue Compliance</span>
+            <h4 class="card-title mb-1"><?=count($overdue)?></h4>
+          </div>
+        </div>
+      </div>
 
-                              
-                        <!-- Total Revenue -->
-                        <!--/ Total Revenue -->
-                        <!-- <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                           <div class="row">
-                              <div class="col-6 mb-4">
-                                 <div class="card">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                             <img src="assets/img/icons/unicons/paypal.png" ="Credit Card" class="rounded">
-                                          </div>
-                                          <div class="dropdown">
-                                             <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                             <i class="bx bx-dots-vertical-rounded"></i>
-                                             </button>
-                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <span class="d-block mb-1">Payments</span>
-                                       <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                                       <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-'></i> -14.82%</small>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-6 mb-4">
-                                 <div class="card">
-                                    <div class="card-body">
-                                       <div class="card-title d-flex align-items-start justify-content-between">
-                                          <div class="avatar flex-shrink-0">
-                                             <img src="assets/img/icons/unicons/paypal.png" ="Credit Card" class="rounded">
-                                          </div>
-                                          <div class="dropdown">
-                                             <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                             <i class="bx bx-dots-vertical-rounded"></i>
-                                             </button>
-                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <span class="d-block mb-1">Payments</span>
-                                       <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                                       <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-'></i> -14.82%</small>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-6 mb-4">
-                                 <div class="card">
-                                    <div class="card-body pb-2">
-                                       <span class="d-block fw-semibold mb-1">Revenue</span>
-                                       <h3 class="card-title mb-1">425k</h3>
-                                       <div id="revenueChart"></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div> -->
-                    
-                 
-
-                     </div>
+  </div>
                      <br>
                      <div class="card">
   
@@ -291,36 +165,48 @@
           
       &nbsp;   &nbsp;<li>
           {{--<select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">--}}
-
-            <form action="{{ route('filter') }}" method="get">
-               @csrf
-               <select name="days" class="form-control select-box select2" onchange="this.form.submit()" >
+               <select name="" class="form-control select2" class="bx-plus">
                                              <option value="">Filter</option>
-                                             <option value="7">7 Days</option>
-                                             <option value="15">15 Days</option>
-                                             <option value="30">30 Days</option>
-                                             <option value="90">3 Month</option>
-                                             <option value="120">6 Month</option>
-                                             <option value="range"><u class="color:black">Custom Range</u></option>
-                     </select>
-
-                  </form>
+                                             <option value="7 Days">7 Days</option>
+                                             <option value="15 Days">15 Days</option>
+                                             <option value="30 Days">30 Days</option>
+                                             <option value="3 Month">3 Month</option>
+                                             <option value="6 Month">6 Month</option>
+                                            
+                                            <option value="range"><u class="color:black">Custom Range</u></option>
+                                          </select>
         </li>
 
       &nbsp;&nbsp;
-         {{-- <div class="col-md-2">
-                           <div class="input-group input-group-merge">
+         <div class="col-md-2">
+                           {{--<div class="input-group input-group-merge">
                               <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                               <input type="text" class="form-control" placeholder="Search User by Client Group" aria-label="Search..." aria-describedby="basic-addon-search31" />
-                           </div>
-                        </div> --}}
+                           </div>--}}
+                        </div>
      
      
 
 
      <div class="col-md-8" style="text-align: end;">
         
-      @if ($user->role == 0)
+      {{--@if ($user->role == 0)--}}
+
+      {{--<a href="{{url('client_group/create')}}">
+         <button type="button" class="btn btn-primary"><span class="tf-icons bx bx-plus"></span> Create Master Group
+          </button></a>
+     
+    
+       <a href="{{url('client_entity/create')}}">
+         <button type="button" class="btn btn-primary"><span class="tf-icons bx bx-plus"></span> Create Master Entity</button>
+       </a>
+      
+       
+       <a href="{{url('country_compliance/create')}}">
+         <button type="button"  class="btn btn-primary"><span class="tf-icons bx bx-plus"></span>Create Compliance</button></a>--}}
+       
+          
+      {{--@elseif($user->permissions[2]->create == 1)--}}
 
       <a href="{{url('client_group/create')}}">
          <button type="button" class="btn btn-primary"><span class="tf-icons bx bx-plus"></span> Create Master Group
@@ -332,27 +218,11 @@
        </a>
       
        
-       <a href="{{url('country_complience/create')}}">
+       <a href="{{url('country_compliance/create')}}">
          <button type="button"  class="btn btn-primary"><span class="tf-icons bx bx-plus"></span>Create Compliance</button></a>
        
           
-      @elseif($user->permissions[2]->create == 1)
-
-      <a href="{{url('client_group/create')}}">
-         <button type="button" class="btn btn-primary"><span class="tf-icons bx bx-plus"></span> Create Master Group
-          </button></a>
-     
-    
-       <a href="{{url('client_entity/create')}}">
-         <button type="button" class="btn btn-primary"><span class="tf-icons bx bx-plus"></span> Create Master Entity</button>
-       </a>
-      
-       
-       <a href="{{url('country_complience/create')}}">
-         <button type="button"  class="btn btn-primary"><span class="tf-icons bx bx-plus"></span>Create Compliance</button></a>
-       
-          
-      @endif
+      {{--@endif--}}
 </div>
      
    
@@ -388,170 +258,57 @@
           </tr>
 </thead>
        <tfoot>
-
-         @if ($user->role == 0)
-
-
-         @foreach($info as $item)
-         <tr>
-           <td>
-            <div class="form-check">
-               <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" >
-             </div>
-             </div>
-           </td>
-           <td><?php $val=App\Models\client_group_master::where('id',$item->group_name)->first(); echo $val->client_group;?></td>
-           <td><?php $val=App\Models\country::where('id',$item->country)->first(); echo $val->country;?></td>
-           <td><?php $val=App\Models\client_entity_master::where('id',$item->entity_id)->first(); echo $val->client_entity_name;?></td>
-           <td>{{$item->complaince_name}}</td>
-           <td>{{$item->periodend}}</td>
-           <td><?php $val=App\Models\frequency::where('id',$item->frequency)->first(); echo $val->frequency;?></td>
-           <td>
-             {{$item->form}}
-              </td>
-              
-              <td>{{$item->due_date}}</td>
-              <td>{{$item->extended_date}}</td>
-           <td>{{ empty($item->complation_date)? "-" : $item->complation_date }}</td>
-           <td>{{ empty($item->completion_delay)? "-" : $item->completion_delay }}</td>
-           <td>{{$item->notes}}</td>
-           
-           <td>{{$item->attacment}}</td>
-           {{-- <td>{{ $item->created_by }}</td>
-           <td>{{ $item->updated_by }}</td> --}}
-           {{--<td>@if($item->updated_by == 0)
-               --
-               @else
-               <?php $val=App\Models\User::where('id', $item->created_by)->first();  echo $val->name;?>@endif</td>
-           
-           
-           <td>
-               @if($item->updated_by == 0)
-               --
-               @else
+           @foreach($entity as $item)
+          <tr>
+            <td>
+             <div class="form-check">
+                <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" >
+              </div>
+              </div>
+            </td>
+            <td><?php $val=App\Models\client_group_master::where('id',$item->group_name)->first(); echo $val->client_group;?></td>
+            <td><?php $val=App\Models\country::where('id',$item->country)->first(); echo $val->country;?></td>
+            <td><?php $val=App\Models\client_entity_master::where('id',$item->entity_id)->first(); echo $val->client_entity_name;?></td>
+            <td>{{$item->complaince_name}}</td>
+            <td>{{$item->periodend}}</td>
+            <td><?php $val=App\Models\frequency::where('id',$item->frequency)->first(); echo $val->frequency;?></td>
+            <td>
+              {{$item->form}}
+               </td>
                
-               <?php $val=App\Models\User::where('id', $item->updated_by)->first();  echo ($val->name == 0)? "" : $val->name;?>
-               @endif
-               </td> --}}
-           <td>
+               <td>{{$item->due_date}}</td>
+               <td>{{$item->extended_date}}</td>
+            <td>{{ empty($item->complation_date)? "-" : $item->complation_date }}</td>
+            <td>{{ empty($item->completion_delay)? "-" : $item->completion_delay }}</td>
+            <td>{{$item->notes}}</td>
+            
+            <td>{{$item->attacment}}</td>
+            {{-- <td>{{ $item->created_by }}</td>
+            <td>{{ $item->updated_by }}</td> --}}
+            {{--<td>@if($item->updated_by == 0)
+                --
+                @else
+                <?php $val=App\Models\User::where('id', $item->created_by)->first();  echo $val->name;?>@endif</td>
+            
+            
+            <td>
+                @if($item->updated_by == 0)
+                --
+                @else
+                
+                <?php $val=App\Models\User::where('id', $item->updated_by)->first();  echo ($val->name == 0)? "" : $val->name;?>
+                @endif
+                </td>--}}
+            <td>
+               <a href="{{url('/edit-information/'.$item->id)}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
 
-              @if ($user->role == 0)
-               
-              <a href="{{url('/edit-information/'.$item->id)}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
+                <a href="{{url('deletemanage/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
 
-    
-                  @elseif($user->permissions[2]->update == 1)
-    
-                  <a href="{{url('/edit-information/'.$item->id)}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
-
-    
-                  @endif
-
-
-                  @if ($user->role == 0)
-                  <a href="{{url('deletemanage/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
+            </td>
+            
+          </tr>
         
-                      @elseif($user->permissions[2]->delete == 1)
-        
-                      <a href="{{url('deletemanage/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-        
-                      @endif
-
-
-
-
-           </td>
-           
-         </tr>
-       
-           @endforeach
-
-
-             
-         @else
-
-         @foreach($entity as $item)
-         <tr>
-           <td>
-            <div class="form-check">
-               <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" >
-             </div>
-             </div>
-           </td>
-           <td><?php $val=App\Models\client_group_master::where('id',$item->group_name)->first(); echo $val->client_group;?></td>
-           <td><?php $val=App\Models\country::where('id',$item->country)->first(); echo $val->country;?></td>
-           <td><?php $val=App\Models\client_entity_master::where('id',$item->entity_id)->first(); echo $val->client_entity_name;?></td>
-           <td>{{$item->complaince_name}}</td>
-           <td>{{$item->periodend}}</td>
-           <td><?php $val=App\Models\frequency::where('id',$item->frequency)->first(); echo $val->frequency;?></td>
-           <td>
-             {{$item->form}}
-              </td>
-              
-              <td>{{$item->due_date}}</td>
-              <td>{{$item->extended_date}}</td>
-           <td>{{ empty($item->complation_date)? "-" : $item->complation_date }}</td>
-           <td>{{ empty($item->completion_delay)? "-" : $item->completion_delay }}</td>
-           <td>{{$item->notes}}</td>
-           
-           <td>{{$item->attacment}}</td>
-           {{-- <td>{{ $item->created_by }}</td>
-           <td>{{ $item->updated_by }}</td> --}}
-           {{--<td>@if($item->updated_by == 0)
-               --
-               @else
-               <?php $val=App\Models\User::where('id', $item->created_by)->first();  echo $val->name;?>@endif</td>
-           
-           
-           <td>
-               @if($item->updated_by == 0)
-               --
-               @else
-               
-               <?php $val=App\Models\User::where('id', $item->updated_by)->first();  echo ($val->name == 0)? "" : $val->name;?>
-               @endif
-               </td> --}}
-           <td>
-
-              @if ($user->role == 0)
-               
-              <a href="{{url('/edit-information/'.$item->id)}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
-
-    
-                  @elseif($user->permissions[2]->update == 1)
-    
-                  <a href="{{url('/edit-information/'.$item->id)}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
-
-    
-                  @endif
-
-
-                  @if ($user->role == 0)
-                  <a href="{{url('deletemanage/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-        
-                      @elseif($user->permissions[2]->delete == 1)
-        
-                      <a href="{{url('deletemanage/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-        
-                      @endif
-
-
-
-
-           </td>
-           
-         </tr>
-       
-           @endforeach
-             
-         @endif
-
-
-         
+            @endforeach
         </tfoot>
       </table>
     </div>
@@ -577,12 +334,6 @@
          <!-- Drag Target Area To SlideIn Menu On Small Screens -->
          <div class="drag-target"></div>
       </div>
-
-      <script>
-         $(document).on('change', 'select.select-box', function (e) {
-    $(this).closest('form').submit();
-});
-      </script>
       <!-- / Layout wrapper -->
       <!-- Core JS -->
       <!-- build:js assets/vendor/js/core.js -->

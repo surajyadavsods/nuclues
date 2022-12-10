@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -179,7 +177,7 @@ I
 
             <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Year End</label>
-              <input type="date" id="formValidationName" class="form-control" placeholder="John Doe" name="year_end" value="{{$master->year_end}}" />
+              <input type="date" id="formValidationName" class="form-control"  name="year_end" value="{{$master->year_end}}" />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span>Status</label>
@@ -271,7 +269,7 @@ I
             </div>
              <div class="col-md-3">
                 <label class="form-label" for="formValidationName"> Responsibility</label>
-                <input type="text" id="formValidationName" class="form-control" placeholder="Enter Any responsibility" name="responsibility" value="{{$master->responsibility}}"/>
+                <input type="text" id="formValidationName" class="form-control"  name="responsibility" value="{{$master->responsibility}}"/>
             </div>
         </div>
         <div class="row mt-4">
@@ -330,18 +328,18 @@ I
 
             <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Affiliates </label>
-                <input type="text" id="formValidationName" class="form-control" placeholder="Affliate's Name" name="affiliate_name" value="{{$master->affiliate_name}}" />
+                <input type="text" id="formValidationName" class="form-control" name="affiliate_name" value="{{$master->affiliate_name}}" />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="formValidationEmail"><span class="mandatory">*</span> Affiliates Email ID</label>
-                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_email" placeholder="Enter Affliate's Email ID" value="{{$master->affiliate_email}}" />
+                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_email" value="{{$master->affiliate_email}}" />
             </div>
 </div>
 <div class="row mt-4">
             <div class="col-md-6">
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationPass"><span class="mandatory">*</span> Affiliates Contact Number</label>
-                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_phone" placeholder="Enter Affliate's Account Number" value="{{$master->affiliate_phone}}" />
+                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_phone" value="{{$master->affiliate_phone}}" />
 </div>
             </div>
            <br><br>

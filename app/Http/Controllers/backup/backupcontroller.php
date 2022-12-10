@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\backup;
 
 use App\Http\Controllers\Controller;
-use App\Models\BackupRestore;
 use Illuminate\Http\Request;
-
+use App\Models\activity;
 class backupcontroller extends Controller
 {
     /**
@@ -15,12 +14,8 @@ class backupcontroller extends Controller
      */
     public function index()
     {
-        
-        $backup = BackupRestore::all();
-
-        return view('backend.backup.index', [
-            'backups' => $backup,
-        ]);
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.backup.index',$data);
     }
 
     /**

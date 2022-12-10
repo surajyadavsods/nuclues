@@ -14,8 +14,9 @@ class activitycontroller extends Controller
      */
     public function index()
     {
-        $data = activity::all();
-        return view('backend.activity.index',compact('data'));
+        $data['activity'] = activity::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.activity.index',$data);
     }
 
     /**
@@ -82,5 +83,14 @@ class activitycontroller extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function searchactivity(Request $request)
+    {
+        $fromto = $request->fromDate;
+        $todate = $request->toDate;
+        $data['notification'] = activity::latest()->limit(15)->get();
+        $data['activity'] = activity::whereBetween('date',[$fromto,$todate])->get();
+        return view('backend.activity.index',$data);
     }
 }

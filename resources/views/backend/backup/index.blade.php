@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -119,10 +118,6 @@
 <h4 class="fw-bold py-3 mb-4">
 Backup Restoration
 </h4>
-
-
-@if ($user->role == 0)
-                
 <div class="row">
   <!-- FormValidation -->
   <div class="col-12">
@@ -201,104 +196,12 @@ Backup Restoration
   </div>
   <br> 
 <div class="row">
-        <div class="col-md-3">
+                         <div class="col-md-3">
                            <button type="button" class="btn btn-primary">Restore Backup</button>
-        </div>
+                        </div>
                         
                        
-</div>
-
-@elseif($user->permissions[3]->create == 1)
-
-<div class="row">
-  <!-- FormValidation -->
-  <div class="col-12">
-    <div class="card">
-      <!-- <h5 class="card-header">FormValidation</h5> -->
-      <div class="card-body">
-
-        <form id="formValidationExamples" class="row g-3">
-
-          <!-- Account Details -->
-
-
-
-         <div class="row">
-
-            <div class="col-md-3">
-                <label class="form-label" for="formValidationName">Client Group</label>
-               <select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">
-                <option value="">Select Client Group Name</option>
-                <option value="Tata">Tata</option>
-                <option value="Birala">Birala</option>
-                <option value="Infosys">Infosys</option>
-            </select>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span> Client Entity </label>
-                <select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">
-                <option value="">Select Client Entity Name</option>
-                <option value="TATA">TATA</option>
-                <option value="TATA 123">TATA 123</option>
-                 <option value="TATA 123">ALL</option>
-                
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="form-label" for="formValidationName">User Name</label>
-               <select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">
-                <option value="">Select Name</option>
-                <option value="Tata">Miss Jesicca Archer</option>
-                <option value="Birala">Mr. Roger D'cruz</option>
-                <option value="Infosys">Mr. John Doe</option>
-            </select>
-            </div>
-            <div class="col-md-2">
-                <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span>Date</label>
-
-                <input type="date" class="form-control" placeholder="Select Date">
-                {{-- <select id="formValidationSelect2" type="date" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">
-                <option value="">Select Date</option>
-                <option value="Australia">Australia</option>
-                <option value="Bangladesh">Bangladesh</option>
-                </select> --}}
-            </div>
-
-            <div class="col-md-2">
-                <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span>Time</label>
-
-                <input type="time" class="form-control" placeholder="Select Time">
-
-                {{-- <select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">
-                <option value="">Select Time</option>
-                <option value="Australia">Australia</option>
-                <option value="Bangladesh">Bangladesh</option>
-                </select> --}}
-            </div>
-
-
-
-          
-
-         </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <br> 
-<div class="row">
-        <div class="col-md-3">
-                           <button type="button" class="btn btn-primary">Restore Backup</button>
-        </div>
-                        
-                       
-</div>
-    
-@endif
-
-
-
+                     </div>
 <!-- Invoice List Table -->
 <div class="card p-3 mt-3">
     
@@ -321,34 +224,23 @@ Backup Restoration
          
         </thead>
         <tfoot>
-
-
-          @foreach ($backups as $backup)
-
+            
           <tr>
             <td>
               <div class="form-check">
                 <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" >
               </div>
             </td>
-            <td>{{ $backup->groups->client_group }}</td>
+            <td>XYZ Group</td>
 
-            <td>{{ $backup->entity_name }}</td>
-             <th>Suraj</th>
-            <td>{{ date('d-m-Y', strtotime($backup->date)) }}  </td>
-            <td>{{ date('H:i A', strtotime($backup->time)) }}</td>
-            <th>{{ $backup->users->name }}</th>
-            <td>{{ date('F jS, y', strtotime($backup->date)) }}</td>
-            <td>
-              
-              <span class="badge rounded-pill bg-label-success">Successful </span>
-            
-            </td>
+            <td>EFG Legal</td>
+             <th>Dhvani</th>
+            <td>20-10-2022</td>
+            <td>10:20</td>
+            <th>Admin</th>
+            <td>Aug 22, 2022</td>
+            <td><span class="badge rounded-pill bg-label-success">Successful </span></td>
           </tr>
-              
-          @endforeach
-            
-       
         
             
         </tfoot>

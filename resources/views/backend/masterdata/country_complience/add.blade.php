@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -96,20 +94,25 @@ I
                               <a href="javascript:void(0);">Master Data Management</a>
                            </li>
                            <li class="breadcrumb-item">
-                              <a href="{{url('country_complience')}}">Country Compliance</a>
+                              <a href="{{url('country_compliance')}}">Country Compliance</a>
                            </li>
                            <li class="breadcrumb-item">
                               <a href="javascript:void(0);">New Compliance</a>
                            </li>
                         </ol>
                      </nav>
+                     @if(session('status'))
+   <div class="alert alert-danger">
+  {{session('status')}}
+  </div>
+  @endif
                      <div class="row">
                         <!-- FormValidation -->
                         <div class="col-12">
                            <div class="card">
                               <!-- <h5 class="card-header">FormValidation</h5> -->
                               <div class="card-body">
-                                 <form id="formValidationExamples" class="row g-3" action="{{route('country_complience.store')}}" method="POST" enctype="multipart/form-data">
+                                 <form id="formValidationExamples" class="row g-3" action="{{route('country_compliance.store')}}" method="POST" enctype="multipart/form-data">
                                   @csrf
                                     <!-- Account Details -->
                                     <div class="row  mt-2">
@@ -122,6 +125,9 @@ I
                 <option value="{{$item->id}}">{{$item->country}}</option>
                 @endforeach
                                           </select>
+                                          @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('country') }}</div>
+                                 @endif
                                        </div>
                                        
                                        <div class="col-md-3">
@@ -133,18 +139,34 @@ I
                 <option value="{{$item->id}}">{{$item->type}}</option>
                 @endforeach
                                           </select>
+                                          @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('entity_type') }}</div>
+                                 @endif
                                        </div>
                                         <div class="col-md-3">
                                           <div class="form-password-toggle">
                                              <label class="form-label" for="formValidationPass"><span class="mandatory">*</span> Name of Compliance</label>
-                                             <input type="text" id="formValidationName" class="form-control" placeholder="Compliance Name" name="complaince_name" />
+                                             <select id="formValidationSelect2" name="complaince_name" class="form-select select2" data-allow-clear="true">
+                                             <option value="">Select Complaince Name</option>
+                                             <option value="Annual Return">Annual Return</option>
+                                             <option value="Annual Employee">Annual Employee</option>
+                                             <option value="Tax Filing etc">Tax Filing etc</option>
                                              
+                               </select>
+                                            
+                                             @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('complaince_name') }}</div>
+                                 @endif
                                           </div>
                                        </div>
                                        <div class="col-md-3">
                                           <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Period End</label>
                                           <input type="date" id="formValidationName" class="form-control" placeholder="John Doe" name="periodend" />
+                                           @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('periodend') }}</div>
+                                 @endif
                                        </div>
+                                      
                                     </div>
                                     <div class="row mt-4 mb-3">
                                        
@@ -158,24 +180,43 @@ I
                 <option value="{{$item->id}}">{{$item->frequency}}</option>
                 @endforeach
                                           </select>
+                                          @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('Frequency') }}</div>
+                                 @endif
                                        </div>
                                        <div class="col-md-3">
                                           <div class="form-password-toggle">
                                              <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span> Form Name</label>
-                                             <input type="text" id="formValidationName" class="form-control" placeholder="Form Name" name="forms" />
+                                             <select id="formValidationSelect2" name="forms" class="form-select select2" data-allow-clear="true">
+                                             <option >Select Forms</option>
+                                             <option value="Form 484"> Form 484</option>
+                                             <option value="Form 22">Form 22</option>
+                                             <option value="Form MGT-7">Form MGT-7</option>
+                                             <option value="Form CS01">Form CS01</option>
                                              
+                               </select>
                                           </div>
+                                          @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('forms') }}</div>
+                                 @endif
                                        </div>
                                        <div class="col-md-3">
                                           <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Due Date</label>
-                                          <input type="date" id="formValidationName" class="form-control" name="due_Date" />
+                                          <input type="date" id="formValidationName" class="form-control" name="due_date" />
+                                            @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('due_date') }}</div>
+                                 @endif
                                        </div>
+                                     
                                        </div>
                                        <div class="row mt-4 mb-3">
                                        <div class="col-md-6">
                                           <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Note</label>
                                           <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Note" name="notes" /></textarea>
                                        </div>
+                                       @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('notes') }}</div>
+                                 @endif
                                        </div>
                                        
                                        

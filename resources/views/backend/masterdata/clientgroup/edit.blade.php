@@ -1,4 +1,4 @@
-<!DOCTYPE html>I
+<!DOCTYPE html>
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -213,7 +213,7 @@
             <div class="row mt-4 mb-3">
                                        <div class="col-md-6">
                                           <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Responsibility</label>
-                                          <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility" name="responsibility" value="{{$group->responsibility}}"/></textarea>
+                                          <textarea type="text" id="formValidationName" class="form-control" name="responsibility" value="{{$group->responsibility}}"/></textarea>
                                        </div>
                                        </div>
            {{--<h5 class="fw py-3 mb-4">
@@ -224,7 +224,7 @@
 
              <div class="col-md-3">
                 <div class="form-password-toggle">
-                <label class="form-label" for="formValidationConfirmPass">Contact Person</label>
+                <label class="form-label" for="formValidationConfirmPass">Contact Person 2</label>
                 <div class="input-group input-group-merge"> 
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="person2" placeholder="Contact Person" aria-describedby="multicol-confirm-password2" value="{{$group->person2}}" />
                 </div>
@@ -232,7 +232,7 @@
             </div>
                 <div class="col-md-3">
                 <div class="form-password-toggle">
-                <label class="form-label" for="formValidationConfirmPass">Contact Phone Number</label>
+                <label class="form-label" for="formValidationConfirmPass">Contact Phone Number 2</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="phone2" placeholder="Contact Person" aria-describedby="multicol-confirm-password2" value="{{$group->phone2}}" />
                 </div>
@@ -240,7 +240,7 @@
                 </div>
                   <div class="col-md-3">
                 <div class="form-password-toggle">
-                <label class="form-label" for="formValidationConfirmPass">E-Mail Id</label>
+                <label class="form-label" for="formValidationConfirmPass">E-Mail Id 2</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="email2" placeholder="Contact Person Email Id" aria-describedby="multicol-confirm-password2" value="{{$group->email2}}"/>
                 </div>
@@ -248,12 +248,18 @@
            </div>
             <div class="col-md-3">
             <div class="form-password-toggle">
-                <label class="form-label" for="formValidationConfirmPass">Designation</label>
+                <label class="form-label" for="formValidationConfirmPass">Designation 2</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="designation2" placeholder="Contact Person Designation" aria-describedby="multicol-confirm-password2" value="{{$group->designation2}}" />
                 </div>
                 </div>
             </div>
+            <div class="row mt-4 mb-3">
+                                       <div class="col-md-6">
+                                          <label class="form-label" for="formValidationName"><span class="mandatory"></span> Responsibility 2</label>
+                                          <textarea type="text" id="formValidationName" class="form-control" name="responsibility2" value="{{$group->responsibility2}}"/></textarea>
+                                       </div>
+                                       </div>
         {{--<div class="col-md-4">
             <div class="form-password-toggle">
                 <label class="form-label" for="formValidationConfirmPass"></label>

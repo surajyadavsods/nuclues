@@ -39,5 +39,7 @@ class client_entity_master extends Model
         'affilate_email2',
         'affilate_phone2',
         'responsibility',
+        'responsibility2',
+
     ];
 }

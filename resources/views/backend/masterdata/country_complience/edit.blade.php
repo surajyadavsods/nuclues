@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -97,7 +95,7 @@ I
                               <a href="javascript:void(0);">Master Data Management</a>
                            </li>
                            <li class="breadcrumb-item">
-                              <a href="{{url('coutry_complience')}}">Country Compliance</a>
+                              <a href="{{url('country_compliance')}}">Country Compliance</a>
                            </li>
                            <li class="breadcrumb-item">
                               <a href="javascript:void(0);">Edit Compliance</a>
@@ -111,7 +109,7 @@ I
                               <!-- <h5 class="card-header">FormValidation</h5> -->
                               <div class="card-body">
                                  <form id="formValidationExamples" class="row g-3" 
-                                  action="{{url('coutry_complience/'.$master->id)}}" method="POST" enctype="multipart/form-data">
+                                  action="{{url('country_compliance/'.$master->id)}}" method="POST" enctype="multipart/form-data">
                                   @csrf
                             @method('PUT')
                                     <!-- Account Details -->
@@ -129,7 +127,14 @@ I
                                        
                                        <div class="col-md-6">
                                           <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span>Name of Compliance</label>
-                                           <input type="text" id="formValidationName" class="form-control" placeholder="Compliance Name" name="complaince_name" value="{{$master->complaince_name}}" />
+                                           
+                                           <select id="formValidationSelect2" name="complaince_name" class="form-select select2" data-allow-clear="true">
+                                             <option value="{{$master->complaince_name}}">{{$master->complaince_name}}</option>
+                                             <option value="Annual Return">Annual Return</option>
+                                             <option value="Annual Employee">Annual Employee</option>
+                                             <option value="Tax Filing etc">Tax Filing etc</option>
+                                             
+                               </select>
                                        </div>
                                      </div>
                                      <div class="row  mt-2">
@@ -165,7 +170,15 @@ I
                                        <div class="col-md-6">
                                           <div class="form-password-toggle">
                                              <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span> Form Name</label>
-                                              <input type="text" id="formValidationName" class="form-control" placeholder="Compliance Name" name="forms" value="{{$master->forms}}" />
+                                              
+                                               <select id="formValidationSelect2" name="forms" class="form-select select2" data-allow-clear="true">
+                                             <option value="{{$master->forms}}">{{$master->forms}}</option>
+                                             <option value="Form 484"> Form 484</option>
+                                             <option value="Form 22">Form 22</option>
+                                             <option value="Form MGT-7">Form MGT-7</option>
+                                             <option value="Form CS01">Form CS01</option>
+                                             
+                               </select>
                                           </div>
                                        </div>
                                      </div>

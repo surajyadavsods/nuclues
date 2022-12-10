@@ -125,18 +125,18 @@
       <!-- <h5 class="card-header">FormValidation</h5> -->
       <div class="card-body">
 <form id="formValidationExamples" class="row g-3" 
-                                  action="{{url('update-information/'.$data->id)}}" method="POST" enctype="multipart/form-data">
+                                  action="{{url('update-information/'.$manage->id)}}" method="POST" enctype="multipart/form-data">
                                   @csrf
                             @method('PUT')
          <div class="row  mt-2">
 
             <div class="col-md-6">
                 <label class="form-label" for="formValidationName"> Client Group </label>
-              <input type="text" name="group_name" value="{{$data->group_name}} <?php $val=App\Models\client_group_master::where('id',$data->group_name)->first(); echo $val->client_group;?>" readonly class="form-control">
+              <input type="text" name="group_name" value="{{$manage->group_name}} <?php $val=App\Models\client_group_master::where('id',$manage->group_name)->first(); echo $val->client_group;?>" readonly class="form-control">
             </div>
 <div class="col-md-6">
                 <label class="form-label" for="formValidationName">Country</label>
-              <input type="text" name="country" value="{{$data->country}} <?php $val=App\Models\country::where('id',$data->country)->first(); echo $val->country;?>" readonly class="form-control">
+              <input type="text" name="country" value="{{$manage->country}} <?php $val=App\Models\country::where('id',$manage->country)->first(); echo $val->country;?>" readonly class="form-control">
             </div>
             
          
@@ -150,7 +150,7 @@
             </div>
                <div class="col-md-6">
                 <label class="form-label" for="formValidationName">Compliance Name</label>
-              <input type="text" name="complaince_name" value="{{$data->complaince_name}}" readonly class="form-control">
+              <input type="text" name="complaince_name" value="{{$manage->complaince_name}}" readonly class="form-control">
             </div>
             
          </div>
@@ -159,11 +159,11 @@
              
          <div class="col-md-6">
                 <label class="form-label" for="formValidationName">Period End</label>
-              <input type="text" name="periodend" value="{{$data->periodend}}" readonly class="form-control">
+              <input type="text" name="periodend" value="{{$manage->periodend}}" readonly class="form-control">
             </div>
 <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory"></span> Frequency</label>
-              <input type="" id="formValidationName" class="form-control" placeholder="John Doe" name="frequency" value="{{$data->frequency}} <?php $val=App\Models\frequency::where('id',$data->frequency)->first(); echo $val->frequency;?>" readonly />
+              <input type="" id="formValidationName" class="form-control" placeholder="John Doe" name="frequency" value="{{$manage->frequency}} <?php $val=App\Models\frequency::where('id',$manage->frequency)->first(); echo $val->frequency;?>" readonly />
             </div>
             
          </div>
@@ -173,43 +173,43 @@
 
            {{-- <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Frequency</label>
-              <input type="" id="formValidationName" class="form-control" placeholder="John Doe" name="frequency" value="{{$data->frequency}} <?php $val=App\Models\frequency::where('id',$data->frequency)->first(); echo $val->frequency;?>" readonly />
+              <input type="" id="formValidationName" class="form-control" placeholder="John Doe" name="frequency" value="{{$manage->frequency}} <?php $val=App\Models\frequency::where('id',$manage->frequency)->first(); echo $val->frequency;?>" readonly />
             </div>--}}
 <div class="col-md-6">
                 <label class="form-label" for="formValidationName">Form Name</label>
-              <input type="text" name="form" value="{{$data->form}}" readonly class="form-control">
+              <input type="text" name="form" value="{{$manage->form}}" readonly class="form-control">
             </div>
             <div class="col-md-6">
            
   <label class="form-label" for="formValidationName"><span class="mandatory">*</span>DUE DATE</label>
-              <input type="" id="formValidationName" class="form-control" placeholder="John Doe" name="due_date" value="{{$data->due_date}}" readonly />
+              <input type="" id="formValidationName" class="form-control" placeholder="John Doe" name="due_date" value="{{$manage->due_date}}" readonly />
             </div>
           
 </div>
 <div class="row mt-4">
       <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory"></span>EXTENDED DUE DATE</label>
-              <input type="date" id="formValidationName" class="form-control" name="extended_date" value="{{$data->extended_date}}"  />
+              <input type="date" id="formValidationName" class="form-control" name="extended_date" value="{{$manage->extended_date}}"  />
             </div>
 <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span>COMPLETION DATE</label>
-              <input type="date" id="formValidationName" class="form-control" name="complation_date" value="{{$data->complation_date}}"  />
+              <input type="date" id="formValidationName" class="form-control" name="complation_date" value="{{$manage->complation_date}}"  />
             </div>
             </div>
             <div class="row mt-4">
             <div class="col-md-12">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span>Attachment</label>
-              <input type="file" id="formValidationName" class="form-control" name="attacment" value="{{$data->attacment}}"  />
+              <input type="file" id="formValidationName" class="form-control" name="attacment" value="{{$manage->attacment}}"  />
             </div>
             </div>
             <div class="row mt-4">
             <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span>Notes</label>
-              <textarea type="text" id="formValidationName" class="form-control" value="Sample Notes" name="notes" value="{{$data->notes}}" readonly /></textarea>
+              <textarea type="text" id="formValidationName" class="form-control" value="Sample Notes" name="notes" value="{{$manage->notes}}" readonly /></textarea>
             </div>
              <div class="col-md-6">
                 <label class="form-label" for="formValidationName"><span class="mandatory"></span>COMMENTS FOR DELAY</label>
-              <textarea type="text" id="formValidationName" class="form-control" name="completion_delay" value="{{$data->completion_delay}}"  /></textarea>
+              <input type="text" id="formValidationName" class="form-control" name="completion_delay" value="{{$manage->completion_delay}}"  />
             </div>
             
             </div>
@@ -223,7 +223,7 @@
            
 
 </div>
-<input type="hidden" name="status" value="{{$data->status}}">
+<input type="hidden" name="status" value="{{$manage->status}}">
 
             <div class="col-md-6">
            

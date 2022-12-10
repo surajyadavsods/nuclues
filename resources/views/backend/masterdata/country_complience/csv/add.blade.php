@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -94,16 +92,21 @@ I
                      <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-style1">
                            <li class="breadcrumb-item">
-                              <a href="compliancemanagement.php">Master Data Management</a>
+                              <a href="javascript:void(0);">Master Data Management</a>
                            </li>
                            <li class="breadcrumb-item">
-                              <a href="compliancemanagement.php">Country Complience</a>
+                              <a href="{{url('country_complience')}}">Country Complience</a>
                            </li>
                            <li class="breadcrumb-item">
                               <a href="javascript:void(0);">New Compliance</a>
                            </li>
                         </ol>
                      </nav>
+                     @if(session('status'))
+   <div class="alert alert-success">
+  {{session('status')}}
+  </div>
+  @endif
                      <div class="row">
                         <!-- FormValidation -->
                         <div class="col-12">

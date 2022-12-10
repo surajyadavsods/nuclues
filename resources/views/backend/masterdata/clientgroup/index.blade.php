@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -133,23 +132,20 @@ Client Group
                         </div>
                         <div class="col-md-9" style="text-align: end;">
                          
-                          
+                          <a href="{{url('creategroup')}}">
+                           <button type="button" class="btn btn-primary">
+
+                           <span class="tf-icons bx bx-plus"></span>&nbsp;Import Group
+                           </button>
+                         </a>
+                          <a href="{{url('expertgroup')}}">
+                           <button type="button" class="btn btn-primary">
+
+                           <span class="tf-icons bx bx-plus"></span>&nbsp;Export Group
+                           </button>
+                         </a>
                          
                            @if ($user->role == 0)
-
-                           <a href="{{url('creategroup')}}">
-                            <button type="button" class="btn btn-primary">
- 
-                            <span class="tf-icons bx bx-plus"></span>&nbsp;Import Group
-                            </button>
-                          </a>
-                           <a href="{{url('expertgroup')}}">
-                            <button type="button" class="btn btn-primary">
- 
-                            <span class="tf-icons bx bx-plus"></span>&nbsp;Export Group
-                            </button>
-                          </a>
-
 
                           <a href="{{url('client_group/create')}}">
                             <button type="button" class="btn btn-primary">
@@ -159,19 +155,6 @@ Client Group
                           </a>
                               
                           @elseif($user->permissions[2]->create == 1)
-
-                          <a href="{{url('creategroup')}}">
-                            <button type="button" class="btn btn-primary">
- 
-                            <span class="tf-icons bx bx-plus"></span>&nbsp;Import Group
-                            </button>
-                          </a>
-                           <a href="{{url('expertgroup')}}">
-                            <button type="button" class="btn btn-primary">
- 
-                            <span class="tf-icons bx bx-plus"></span>&nbsp;Export Group
-                            </button>
-                          </a>
 
                           <a href="{{url('client_group/create')}}">
                             <button type="button" class="btn btn-primary"> 
@@ -207,7 +190,7 @@ Client Group
          
         </thead>
         <tfoot>
-            @foreach($data as $item)
+            @foreach($group as $item)
           <tr>
             <td>
               <div class="form-check">

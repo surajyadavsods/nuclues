@@ -76,7 +76,7 @@
       <div class="w-px-400 mx-auto">
         <!-- Logo -->
         <div class="app-brand mb-5">
-          <a href="{{url('dashboad')}}" class="app-brand-link gap-2">
+          <a href="{{url('dashboard')}}" class="app-brand-link gap-2">
             <span class="app-brand-logo demo">
 
             <div class="ml-5">
@@ -106,7 +106,7 @@
             <!-- Create a hidden field which is combined by 3 fields above -->
             <input type="hidden" name="otp" />
           </div>
-          <button class="btn btn-primary d-grid w-100 mb-3" style="font:"><a href="{{route('dashboad')}}" style="color:white">
+          <button class="btn btn-primary d-grid w-100 mb-3" style="font:"><a href="{{route('dashboard')}}" style="color:white">
             Verify OTP</a>
           </button>
           <div class="text-center">Didn't get the code?

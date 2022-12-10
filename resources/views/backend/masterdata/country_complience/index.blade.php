@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -170,45 +168,27 @@ Country Compliance
                       </form>
 
                         <div class="col-md-7" style="text-align: end;">
-                         
+                          <a href="{{url('createcompliences')}}">
+                           <button type="button" class="btn btn-primary">
+                           <span class="tf-icons bx bx-plus"></span>&nbsp; Import 
+                           </button>
+                         </a>
+                        
+                          <a href="{{url('expertcompliences')}}">
+                           <button type="button" class="btn btn-primary">
+                           <span class="tf-icons bx bx-plus"></span>&nbsp;Export 
+                           </button>
+                         </a>
                         
                           @if ($user->role == 0)
-
-                          <a href="{{url('createcompliences')}}">
-                            <button type="button" class="btn btn-primary">
-                            <span class="tf-icons bx bx-plus"></span>&nbsp; Import 
-                            </button>
-                          </a>
-                         
-                           <a href="{{url('expertcompliences')}}">
-                            <button type="button" class="btn btn-primary">
-                            <span class="tf-icons bx bx-plus"></span>&nbsp;Export 
-                            </button>
-                          </a>
-
-
-                            <a href="{{url('country_complience/create')}}">
+                            <a href="{{url('country_compliance/create')}}">
                               <button type="button" class="btn btn-primary">
                               <span class="tf-icons bx bx-plus"></span>&nbsp; Add Compliance  
                               </button>
                             </a>
 
                             @elseif($user->permissions[2]->create == 1)
-
-                            <a href="{{url('createcompliences')}}">
-                              <button type="button" class="btn btn-primary">
-                              <span class="tf-icons bx bx-plus"></span>&nbsp; Import 
-                              </button>
-                            </a>
-                           
-                             <a href="{{url('expertcompliences')}}">
-                              <button type="button" class="btn btn-primary">
-                              <span class="tf-icons bx bx-plus"></span>&nbsp;Export 
-                              </button>
-                            </a>
-
-                            
-                            <a href="{{url('country_complience/create')}}">
+                            <a href="{{url('country_compliance/create')}}">
                               <button type="button" class="btn btn-primary">
                               <span class="tf-icons bx bx-plus"></span>&nbsp; Add Compliance 
                               </button>
@@ -251,7 +231,15 @@ Country Compliance
             </td>
             <td>{{$item->complaince_name}}</td>
             <td>{{$item->periodend}}</td>
-            <td><?php $val=App\Models\frequency::where('id',$item->Frequency)->first(); echo $val->frequency;?></td>
+            <td>
+              @if($item->Frequency == NULL)
+              
+                --
+                @else
+                <?php $val=App\Models\frequency::where('id',$item->Frequency)->first(); echo $val->frequency;?>
+                 
+                  @endif
+                </td>
             <td>{{$item->periodend}} </td>
             <td>{{$item->forms}}</td>
             <td>{{$item->notes}}</td>
@@ -268,12 +256,12 @@ Country Compliance
               @if ($user->role == 0)
               
               
-              <a href="{{url('country_complience/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
+              <a href="{{url('country_compliance/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
 
               @elseif($user->permissions[2]->update == 1)
       
               
-                <a href="{{url('country_complience/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
+                <a href="{{url('country_compliance/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
               @endif
 
               {{-- //delete --}}

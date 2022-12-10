@@ -2,7 +2,7 @@
 
   
   <div class="app-brand demo ">
-    <a href="{{url('dashboad')}}" class="app-brand-link">
+    <a href="{{url('dashboard')}}" class="app-brand-link">
      
 
       <!-- <span class="app-brand-text demo menu-text fw-bolder ms-2"></span> -->
@@ -25,7 +25,7 @@
 
     {{--@if ($user->role == 0)--}}
     <li class="menu-item active open">
-      <a href="{{url('dashboad')}}" class="menu-link ">
+      <a href="{{url('dashboard')}}" class="menu-link ">
         <i class="menu-icon tf-icons bx bx-key"></i>
         <div data-i18n="Dashboards">Dashboards</div>
       </a>
@@ -81,7 +81,7 @@
 
 
 
-    @if ($user->role == 0)
+    {{-- @if ($user->role == 0) --}}
     <li class="menu-item">
       <a href="{{url('activity')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-data"></i>
@@ -89,19 +89,19 @@
       </a>
     </li>
 
-     @elseif($user->permissions[6]->read == 1)
-                            <li class="menu-item">
+     {{-- @elseif($user->permissions[1]->read == 1) --}}
+                            {{-- <li class="menu-item">
                               <a href="{{url('activity')}}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-data"></i>
                                 <div > Activity Log</div>
                               </a>
-                            </li>
-     @endif
+                            </li> --}}
+     {{-- @endif --}}
                             
  
 
 
-    @if ($user->role == 0)
+    {{--@if ($user->role == 0)--}}
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class='menu-icon tf-icons bx bx-food-menu'></i>
@@ -122,16 +122,16 @@
 
 
         <li class="menu-item">
-          <a href="{{url('country_complience')}}" class="menu-link">
+          <a href="{{url('country_compliance')}}" class="menu-link">
             <div >Country Compliances</div>
           </a>
         </li>
 
       </ul>
     </li>
-    @elseif($user->permissions[2]->read == 1)
+    {{--@elseif($user->permissions[2]->read == 1)--}}
     
-    <li class="menu-item">
+    {{--<li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class='menu-icon tf-icons bx bx-food-menu'></i>
         <div >Master Data Management</div>
@@ -151,15 +151,15 @@
 
 
         <li class="menu-item">
-          <a href="{{url('country_complience')}}" class="menu-link">
+          <a href="{{url('country_compliance')}}" class="menu-link">
             <div >Country Compliances</div>
           </a>
         </li>
 
       </ul>
-    </li>
+    </li>--}}
         
-    @endif
+    {{--@endif--}}
 
 
 
@@ -269,21 +269,21 @@
    
 
 
-
+{{--
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-support"></i>
-        <div >Support</div>
+        <div >Settings</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="wizard-ex-checkout.php" class="menu-link">
-            <div >Send Message</div>
+            <div >Email Settings</div>
           </a>
         </li>
        
       </ul>
-    </li>
+    </li>--}}
     <!-- <li class="menu-item">
       <a href="modal-examples.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-window-open"></i>

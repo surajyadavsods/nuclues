@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Imports;
-
+use Auth;
 use App\Models\client_entity_master;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithheadingRow;
@@ -35,7 +35,7 @@ class entityimport implements ToModel,WithheadingRow
             'affiliate_phone' => $row['affiliate_phone'],
             'other_user' => $row['other_user'],
             'scope_work' => $row['scope_work'],
-            'created' => $row['created'],
+            'created' => Auth::id(),
         ]);
     }
 }

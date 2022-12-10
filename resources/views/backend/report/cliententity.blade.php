@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -132,33 +130,58 @@ I
       </ol>
     </nav>
 
-
+<form action="{{url('searchcliententity')}}" method="get">
 <div class="row">
-     <div class="col-md-2">
-                            <select name="" class="form-select select2" >
+ 
+    <div class="col-md-2">
+                            <select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true" name="due_date">
                                              <option value="">Filter</option>
-                                           <option value="7 Days">7 Days</option>
-                                             <option value="15 Days">15 Days</option>
-                                             <option value="30 Days">30 Days</option>
-                                             <option value="3 Month">3 Month</option>
-                                             <option value="6 Month">6 Month</option>
+                                             <option value="">7 Days</option>
+                                             <option value="">15 Days</option>
+                                             <option value="">30 Days</option>
+                                             <option value="">3 Month</option>
+                                             <option value="">6 Month</option>
                                             
                                             <option value=""><a href="">Custom Range</a></option>
                                           </select>
                         </div>
-                        <div class="col-md-2">
+                        {{--<div class="col-md-1">
+                           <button type="search" class="btn btn-secondary">
+                          Search
+                           </button>
+                        </div>--}}
+
+                        {{--<div class="col-md-3">
                            <div class="input-group input-group-merge">
                               <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                               <input type="text" class="form-control" placeholder="Search User by Group Name" aria-label="Search..." aria-describedby="basic-addon-search31" />
                            </div>
-                        </div>
-                        <div class="col-md-8" style="text-align: end;">
+                        </div>--}}
+                        {{--<div class="col-md-9" style="text-align: end;">
                            <button type="button" class="btn btn-primary">
                            <span class="tf-icons bx bx-plus"></span>&nbsp; Download Reports
                            </button>
                         </div>
                      </div>
+</form>--}}
+<div class="col-md-2">
+  <input type="date" name="fromDate" class="form-control">
+  </div>
+  <div class="col-md-2">
+  <input type="date" name="toDate" class="form-control">
+  </div>
+   <div class="col-md-1">
+ <button type="search" class="btn btn-primary">search</button>
+  </div>
+  <div class="col-md-5" style="text-align: end;"><a href="{{url('expertreportentity')}}">
+                           <button type="button" class="btn btn-primary">
+                           <span class="tf-icons bx bx-plus"></span>&nbsp; Download Reports
+                           </button></a>
+                        </div>
+</div>
 
+
+</form>
 <!-- Invoice List Table -->
 <div class="card p-3 mt-3">
     <h5 class="card-header">
@@ -195,7 +218,7 @@ I
           </tr>
 </thead>
         <tfoot>
-           @foreach($data as $item)
+           @foreach($cliententity as $item)
            <tr>
             <td>
               <div class="form-check">

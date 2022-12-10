@@ -16,8 +16,6 @@ class manage_complience_information extends Model
             'entity_type',
             'entity_id',
             'country_compliance_id',
-
-            'client_entity_name',
             'complaince_name',
              'periodend',
               'form',
@@ -35,5 +33,6 @@ class manage_complience_information extends Model
             'created_by',
             'updated_by',
             'due_date',
+            'client_entity_name',
     ];
 }

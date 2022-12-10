@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -144,29 +142,12 @@ Raise Query
                            </div>
                         </div>
                         <div class="col-md-7" style="text-align: end;">
-
-                          @if ($user->role == 0)
-                
                           <a href="{{url('ticket/create')}}">
-                            <button type="button" class="btn btn-primary">
- 
-                            <span class="tf-icons bx bx-plus"></span>&nbsp; Raise Query
-                            </button>
-                          </a>
+                           <button type="button" class="btn btn-primary">
 
-                            @elseif($user->permissions[5]->create == 1)
-              
-                            <a href="{{url('ticket/create')}}">
-                              <button type="button" class="btn btn-primary">
-   
-                              <span class="tf-icons bx bx-plus"></span>&nbsp; Raise Query
-                              </button>
-                            </a>
-
-                            @endif
-
-
-                          
+                           <span class="tf-icons bx bx-plus"></span>&nbsp; Raise Query
+                           </button>
+                         </a>
                         </div>
                      </div>
 
@@ -191,7 +172,7 @@ Raise Query
          
         </thead>
         <tfoot>
-            @foreach($data as $item)
+            @foreach($ticket as $item)
           <tr>
             <td>
               <div class="form-check">
@@ -215,31 +196,9 @@ Raise Query
             @endif
           </td>
             <td>
-              
-
-                
-
-                @if ($user->role == 0)
-                
                 <a href="{{url('ticket/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
-  
-                @elseif($user->permissions[5]->update == 1)
-  
-                <a href="{{url('ticket/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
-                    
-                @endif
 
-
-                @if ($user->role == 0)
-                
                 <a href="{{url('delete-ticket/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-  
-                @elseif($user->permissions[5]->delete == 1)
-  
-                <a href="{{url('delete-ticket/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-                    
-                @endif
-
 
             </td>
           </tr>

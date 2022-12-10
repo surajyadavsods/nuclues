@@ -120,7 +120,11 @@
       </ol>
     </nav>
 
-
+  @if(session('status'))
+   <div class="alert alert-danger">
+  {{session('status')}}
+  </div>
+  @endif
 <div class="row">
   <!-- FormValidation -->
   <div class="col-12">
@@ -138,7 +142,7 @@
          <div class="row  mt-2">
 
             <div class="col-md-3">
-                <label class="form-label" for="formValidationName"> Client Group </label>
+                <label class="form-label" for="formValidationName"> <span class="mandatory">*</span>Client Group </label>
                <select id="formValidationSelect2" name="client_group" class="form-select select2" data-allow-clear="true">
                  <option>Select Group</option>
                 @foreach($group as $item)
@@ -146,6 +150,9 @@
                 <option value="{{$item->id}}">{{$item->client_group}}</option>
                 @endforeach
             </select>
+             @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('client_group') }}</div>
+                                 @endif
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span> Country</label>
@@ -156,12 +163,17 @@
                 <option value="{{$item->id}}">{{$item->country}}</option>
                 @endforeach
                 </select>
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('country') }}</div>
+                                 @endif
             </div>
 
             <div class="col-md-3">
                 <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span> Client Entity Name</label>
                 <input type="text" id="formValidationName" class="form-control" placeholder="Client Entity Name" name="client_entity_name" />
-            
+             @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('client_entity_name') }}</div>
+                                 @endif
             </div>
 
             <div class="col-md-3">
@@ -173,6 +185,9 @@
                 <option value="{{$item->id}}">{{$item->type}}</option>
                 @endforeach
                 </select>
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('entity_type') }}</div>
+                                 @endif
             </div>
          </div>
     <div class="row mt-4">
@@ -180,6 +195,9 @@
             <div class="col-md-3">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Year End</label>
                 <input type="date" id="formValidationName" class="form-control" placeholder="John Doe" name="year_end" />
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('year_end') }}</div>
+                                 @endif
             </div>
             <div class="col-md-3">
                 <br>
@@ -212,7 +230,9 @@
                 <label class="form-label" for="formValidationPass"><span class="mandatory">*</span> Date of Incorporation</label>
                 <input type="date" id="formValidationName" class="form-control" placeholder="John Doe" name="date" />
 
-              
+               @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('date') }}</div>
+                                 @endif
                 </div>
             </div>
             <div class="col-md-3">
@@ -270,37 +290,46 @@
         <div class="row mt-4">
             <div class="col-md-3">
                 <label class="form-label" for="formValidationEmail"><span class="mandatory">*</span> CSD </label>
-                <select id="formValidationSelect2" name="mat_spv" class="form-select select2" data-allow-clear="true">
+                <select id="formValidationSelect2" name="csd" class="form-select select2" data-allow-clear="true">
                  <option>Select CSD</option>
                 @foreach($csd as $item)
                
                 <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
                 </select>
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('csd') }}</div>
+                                 @endif
             </div>
 
             <div class="col-md-3">
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationPass"><span class="mandatory">*</span> MAT Manager</label>
-                <select id="formValidationSelect2" name="csd" class="form-select select2" data-allow-clear="true">
+                <select id="formValidationSelect2" name="mat_manager" class="form-select select2" data-allow-clear="true">
                 <option>Select MAT MANAGER</option>
                 @foreach($mat as $item)
                 
                 <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
             </select>
+             @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('mat_manager') }}</div>
+                                 @endif
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span>MAT SPV</label>
-                <select id="formValidationSelect2" name="mat_manager" class="form-select select2" data-allow-clear="true">
+                <select id="formValidationSelect2" name="mat_spv" class="form-select select2" data-allow-clear="true">
                  <option>Select MAT SPV</option>
                  @foreach($spv as $item)
                
                 <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
             </select>
+             @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('mat_spv') }}</div>
+                                 @endif
                 </div>
             </div>
              <div class="col-md-3">
@@ -325,17 +354,27 @@
             <div class="col-md-3">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Affiliates Name</label>
                 <input type="text" id="formValidationName" class="form-control" placeholder="Affliate's Name 1" name="affiliate_name" />
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('affiliate_name') }}</div>
+                                 @endif
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="formValidationEmail"><span class="mandatory">*</span> Affiliates Email ID</label>
                 <input class="form-control" type="text" id="formValidationEmail" name="affiliate_email" placeholder="Enter Affliate's Email ID 1" />
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('affiliate_email') }}</div>
+                                 @endif
             </div>
 
             <div class="col-md-3">
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationPass"><span class="mandatory">*</span> Affiliates Contact Number</label>
                 <input class="form-control" type="text" id="formValidationEmail" name="affiliate_phone" placeholder="Enter Affliate's Account Number 1" />
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('affiliate_phone') }}</div>
+                                 @endif
 </div>
+
             </div>
            {{--<br>
              <h6 class="py-3 mb-4">
@@ -382,22 +421,22 @@
 
             <div class="col-md-3">
                 <label class="form-label" for="formValidationName"><span class="mandatory"></span> Affiliates Name</label>
-                <input type="text" id="formValidationName" class="form-control" placeholder="Affliate's Name 2" name="affiliate_name" />
+                <input type="text" id="formValidationName" class="form-control" placeholder="Affliate's Name 2" name="affiliate_name2" />
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="formValidationEmail"><span class="mandatory"></span> Affiliates Email ID</label>
-                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_email" placeholder="Enter Affliate's Email ID 2" />
+                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_email2" placeholder="Enter Affliate's Email ID 2" />
             </div>
 
             <div class="col-md-3">
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationPass"><span class="mandatory"></span> Affiliates Contact Number</label>
-                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_phone" placeholder="Enter Affliate's Account Number 2" />
+                <input class="form-control" type="text" id="formValidationEmail" name="affiliate_phone2" placeholder="Enter Affliate's Account Number 2" />
 </div>
             </div>
  <div class="col-md-3">
                   <label class="form-label" for="formValidationName"> Responsibility</label>
-                <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility 2" name="responsibility" /></textarea>
+                <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility 2" name="responsibility2" /></textarea>
           
                 </div>
          </div>
