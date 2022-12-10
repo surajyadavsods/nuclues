@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -111,7 +109,11 @@ I
 <h4 class="fw-bold py-3 mb-4">
   Add New Client Group
 </h4>
-
+@if(session('status'))
+   <div class="alert alert-danger">
+  {{session('status')}}
+  </div>
+  @endif
 <nav aria-label="breadcrumb">
       <ol class="breadcrumb breadcrumb-style1">
         <li class="breadcrumb-item">
@@ -148,6 +150,9 @@ I
             <div class="col-md-4">
                 <label class="form-label" for="formValidationName"><span class="mandatory">*</span>  Client Group </label>
                 <input type="text" id="formValidationName" class="form-control" placeholder="Enter Client Group" name="client_group" />
+                @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('client_group') }}</div>
+                                 @endif
             </div>
 
 </div>
@@ -158,7 +163,11 @@ I
                 <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span> Contact Person</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="contect_person" placeholder="Enter Contact Person 1" aria-describedby="multicol-confirm-password2" />
+                   
                 </div>
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('contect_person') }}</div>
+                                 @endif
                 </div>
             </div>
                 <div class="col-md-3">
@@ -166,7 +175,11 @@ I
                 <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span> Contact Phone Number</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="contect_phone" placeholder="Contact Phone Number 1" aria-describedby="multicol-confirm-password2" />
+                   
                 </div>
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('contect_phone') }}</div>
+                                 @endif
                 </div>
             </div>
             
@@ -175,7 +188,11 @@ I
                 <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span> E-Mail Id</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="email" placeholder="Contact Person Email Id 1" aria-describedby="multicol-confirm-password2" />
+                   
                 </div>
+                 @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('email') }}</div>
+                                 @endif
                 </div>
             </div>
             <div class="col-md-3">
@@ -183,13 +200,20 @@ I
                 <label class="form-label" for="formValidationConfirmPass"><span class="mandatory">*</span> Designation</label>
                 <div class="input-group input-group-merge">
                     <input class="form-control" type="text" id="formValidationConfirmPass" name="designation" placeholder="Contact Person Designation 1" aria-describedby="multicol-confirm-password2" />
+                    
                 </div>
+                @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('designation') }}</div>
+                                 @endif
                 </div>
             </div>
 <div class="row mt-4 mb-3">
                                        <div class="col-md-6">
                                           <label class="form-label" for="formValidationName"><span class="mandatory">*</span> Responsibility</label>
-                                          <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility 1" name="responsibility 1" /></textarea>
+                                          <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility 1" name="responsibility" /></textarea>
+                                          @if (count($errors) > 0)
+                                 <div class="noti alert  alert text-danger">{{ $errors->first('responsibility') }}</div>
+                                 @endif
                                        </div>
                                    
            
@@ -201,7 +225,7 @@ I
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationConfirmPass">Contact Person</label>
                 <div class="input-group input-group-merge">
-                    <input class="form-control" type="text" id="formValidationConfirmPass" name="contect_person" placeholder="Enter Contact Person 2" aria-describedby="multicol-confirm-password2" />
+                    <input class="form-control" type="text" id="formValidationConfirmPass" name="person2" placeholder="Enter Contact Person 2" aria-describedby="multicol-confirm-password2" />
                 </div>
                 </div>
             </div>
@@ -209,7 +233,7 @@ I
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationConfirmPass">Contact Phone Number</label>
                 <div class="input-group input-group-merge">
-                    <input class="form-control" type="text" id="formValidationConfirmPass" name="contect_phone" placeholder="Contact Phone Number 2" aria-describedby="multicol-confirm-password2" />
+                    <input class="form-control" type="text" id="formValidationConfirmPass" name="phone2" placeholder="Contact Phone Number 2" aria-describedby="multicol-confirm-password2" />
                 </div>
                 </div>
             </div>
@@ -218,7 +242,7 @@ I
                 <div class="form-password-toggle">
                 <label class="form-label" for="formValidationConfirmPass">E-Mail Id</label>
                 <div class="input-group input-group-merge">
-                    <input class="form-control" type="text" id="formValidationConfirmPass" name="email" placeholder="Contact Person Email Id 2" aria-describedby="multicol-confirm-password2" />
+                    <input class="form-control" type="text" id="formValidationConfirmPass" name="email2" placeholder="Contact Person Email Id 2" aria-describedby="multicol-confirm-password2" />
                 </div>
                 </div>
             </div>
@@ -226,14 +250,14 @@ I
             <div class="form-password-toggle">
                 <label class="form-label" for="formValidationConfirmPass">Designation</label>
                 <div class="input-group input-group-merge">
-                    <input class="form-control" type="text" id="formValidationConfirmPass" name="designation" placeholder="Contact Person Designation 2" aria-describedby="multicol-confirm-password2" />
+                    <input class="form-control" type="text" id="formValidationConfirmPass" name="designation2" placeholder="Contact Person Designation 2" aria-describedby="multicol-confirm-password2" />
                 </div>
                 </div>
             </div>
 <div class="row mt-4 mb-3">
                                        <div class="col-md-6">
                                           <label class="form-label" for="formValidationName"><span class="mandatory"></span> Responsibility</label>
-                                          <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility 2" name="responsibility" /></textarea>
+                                          <textarea type="text" id="formValidationName" class="form-control" placeholder="Enter Responsibility 2" name="responsibility2" /></textarea>
                                        </div>
                                    
            

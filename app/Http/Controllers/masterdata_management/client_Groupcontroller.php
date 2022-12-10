@@ -9,6 +9,7 @@ use Auth;
 use App\Imports\Groupimport;
 use App\Exports\Groupexport;
 use DB;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 class client_Groupcontroller extends Controller
 {
@@ -19,8 +20,9 @@ class client_Groupcontroller extends Controller
      */
     public function index()
     {
-        $data = client_group_master::all();
-        return view('backend.masterdata.clientgroup.index',compact('data'));
+        $data['group'] = client_group_master::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.clientgroup.index',$data);
     }
     
 
@@ -31,7 +33,8 @@ class client_Groupcontroller extends Controller
      */
     public function create()
     {
-        return view('backend.masterdata.clientgroup.add');
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.clientgroup.add',$data);
     }
 
     /**
@@ -48,16 +51,23 @@ class client_Groupcontroller extends Controller
             'contect_phone'=> 'required',
             'designation'=> 'required',
             'email'=> 'required',
+            'responsibility'=> 'required',
         ],
         [
             'client_group.required'=> 'client_group is mandatory',
-            'contect_person.required'=> 'Contect Phone Type is mandatory',
+            'contect_person.required'=> 'Contect Person is mandatory',
             'contect_phone.required'=> 'Contect Phone is mandatory',
             'designation.required'=> 'designation is mandatory',
-            'email.required'=> 'period end is mandatory',
+            'email.required'=> 'Email is mandatory',
+            'responsibility.required'=> 'responsibility is mandatory',
         ]
      );
-          
+        $exist = client_group_master::where('client_group', request()->get('client_group'))->first();
+
+        if ($exist) {
+         return back()->with('status', 'This Client Group Already Exist');
+        } else {
+
         //  $user = Auth::user()->id;
         $data = client_group_master::create([
             
@@ -71,11 +81,13 @@ class client_Groupcontroller extends Controller
             'phone2'=>request()->get('phone2'),
             'person2'=>request()->get('person2'),
             'responsibility'=>request()->get('responsibility'),
+            'responsibility2'=>request()->get('responsibility2'),
             
             // 'created_by'=> $user,
             'created' => Auth::id(),
   
         ]);
+    }
         $activity = activity::create([
             
             'client_group'=>request()->get('client_group'),
@@ -114,6 +126,7 @@ class client_Groupcontroller extends Controller
     public function edit($id)
     {
         $data['group'] = client_group_master::find($id);
+        $data['notification'] = activity::latest()->limit(15)->get();
         $data['entity'] = client_group_master::where('client_group_masters.id',$id)->join('client_entity_masters', 'client_entity_masters.client_group', '=', 'client_group_masters.id')->Select('client_group_masters.*','client_entity_masters.*')->get();
         //dd($data['entity']);
 
@@ -166,6 +179,7 @@ class client_Groupcontroller extends Controller
            $data->designation2 = $request->input('designation2');
             $data->person2 = $request->input('person2');
               $data->responsibility = $request->input('responsibility');
+              $data->responsibility2 = $request->input('responsibility2');
         $data->updated = $request->input('updated');
         
         //client_group_master::where('id',$request->id)->update($data);
@@ -206,19 +220,72 @@ class client_Groupcontroller extends Controller
 
     public function creategroup()
     {
-        return view('backend.masterdata.clientgroup.csv.add');
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.clientgroup.csv.add',$data);
     }
 
-    public function importgroup()
+    public function importgroup(Request $request)
     {
         Excel::Import(new Groupimport, request()->file('file'));
 
         return redirect('client_group')->with('status','Client Group Imported Successfully');
+        
     }
 
 
     public function expertgroup()
     {
-        return Excel::download(new Groupexport, 'group.xlsx');
+        //return Excel::download(new Groupexport, 'group.xlsx');
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+        ,   'Content-type'        => 'text/xlsx'
+        ,   'Content-Disposition' => 'attachment; filename=group.xlsx'
+        ,   'Expires'             => '0'
+        ,   'Pragma'              => 'public'
+    ];
+
+    $lists = client_group_master::all();
+
+    //dd($lists);
+
+    foreach ($lists as $key=> $list) {
+        $check = User::where('id', $list->created)->first();
+    //dd($check);
+    $data[] = array(
+       
+        
+        "client_group" => empty($list->client_group)? "" :$list->client_group,
+        "contect_person" => empty($list->contect_person)? "" : $list->contect_person,
+        "contect_phone" => empty($list->contect_phone) ? "" : $list->contect_phone,
+        "designation Name" => empty($check->designation_name) ? "" : $check->designation_name,
+        "email" => empty($check->email) ? "" : $check->email,
+        "person2" => empty($list->person2)? "" : $list->person2,
+        "phone2" => empty($list->phone2) ? "" : $list->phone2, 
+         "designation2" => empty($list->designation2) ? "" : $list->designation2, 
+          "email2" => empty($list->email2) ? "" : $list->email2, 
+           "responsibility" => empty($list->responsibility) ? "" : $list->responsibility,
+           "responsibility2" => empty($list->responsibility2) ? "" : $list->responsibility2, 
+            "created" => empty($check->name)? "" :$check->name,
+             "updated" => empty($check->name)? "" :$check->name,
+       
+      );
+    
+    }
+
+
+
+    header("Content-Disposition: attachment; filename=\"group.xls\"");
+    header("Content-Type: application/vnd.ms-excel;");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    array_unshift($data, array_keys($data[0]));
+    
+    $out = fopen("php://output", 'w');
+    foreach ($data as $data)
+    {
+        fputcsv($out, $data,"\t");
+    }
+    fclose($out);
     }
 }

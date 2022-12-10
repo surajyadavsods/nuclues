@@ -55,8 +55,19 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="assets/js/config.js"></script>
     
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
 
-
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    <!-- Custom notification for demo -->
+    <!-- beautify ignore:end -->
 
 </head>
 
@@ -133,40 +144,27 @@
                            </div>
                         </div>
                         <div class="col-md-9" style="text-align: end;">
-                         
-                      @if ($user->role == 0)
-                          
-                      <a href="{{url('createentity')}}">
-                        <button type="button" class="btn btn-primary">
-                        <span class="tf-icons bx bx-plus"></span>&nbsp; Import Entity
-                        </button>
-                      </a>
-                    
-                       <a href="{{url('expertentity')}}">
-                        <button type="button" class="btn btn-primary">
-                        <span class="tf-icons bx bx-plus"></span>&nbsp; Export Entity
-                        </button>
-                      </a>
+                          <a href="{{url('createentity')}}">
+                           <button type="button" class="btn btn-primary">
+                           <span class="tf-icons bx bx-plus"></span>&nbsp; Import Entity
+                           </button>
+                         </a>
+                       
+                          <a href="{{url('expertentity')}}">
+                           <button type="button" class="btn btn-primary">
+                           <span class="tf-icons bx bx-plus"></span>&nbsp; Export Entity
+                           </button>
+                         </a>
+                      {{--@if ($user->role == 0)--}}
+                
                         
-                         <a href="{{url('client_entity/create')}}">
+                         {{--<a href="{{url('client_entity/create')}}">
                           <button type="button" class="btn btn-primary">
                           <span class="tf-icons bx bx-plus"></span>&nbsp; Add Client Entity
                           </button>
-                        </a>
+                        </a> --}}
            
-                        @elseif($user->permissions[2]->create == 1)
-
-                        <a href="{{url('createentity')}}">
-                          <button type="button" class="btn btn-primary">
-                          <span class="tf-icons bx bx-plus"></span>&nbsp; Import Entity
-                          </button>
-                        </a>
-                      
-                         <a href="{{url('expertentity')}}">
-                          <button type="button" class="btn btn-primary">
-                          <span class="tf-icons bx bx-plus"></span>&nbsp; Export Entity
-                          </button>
-                        </a>
+                        {{-- @elseif($user->permissions[2]->create == 1)--}}
            
                                 
                           <a href="{{url('client_entity/create')}}">
@@ -175,7 +173,7 @@
                             </button>
                           </a>
                              
-                        @endif
+                        {{--@endif--}}
                         </div>
                      </div>
 
@@ -216,7 +214,7 @@
          
         </thead>
         <tfoot>
-          @foreach($data as $item)
+          @foreach($entities as $item)
             
           <tr>
             <td>
@@ -253,26 +251,21 @@
 
             <td>
 
-              @if ($user->role == 0)
-              <a href="{{url('backup-entity/'.$item->client_entity_name,$item->id)}}"><i class="bx bxs-analyse me-2" style="color: blue;" value="{{$item->id}}"></i> 
-
-                
-              <a href="{{url('view/'.$item->entity_type,$item->id)}}"><i class="bx bx-info-circle me-2" style="color: green;" value="{{$item->id}}"></i> 
+              {{--@if ($user->role == 0)--}}
+              {{--<a href="{{url('view/'.$item->entity_type,$item->id)}}"><i class="bx bx-info-circle me-2" style="color: green;" value="{{$item->id}}"></i> 
                 <a href="{{url('client_entity/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i>
-                </a>
+                </a>--}}
                          {{-- <input type="hidden" ><a href="{{url('viewid?id='.$item->id)}}"></a>--}}
              
-              @elseif($user->permissions[2]->update == 1)
+              {{--@elseif($user->permissions[2]->update == 1)--}}
               
-              <a href="{{url('backup-entity/'.$item->client_entity_name,$item->id)}}"><i class="bx bxs-analyse me-2" style="color: blue;" value="{{$item->id}}"></i> 
-
               <a href="{{url('view/'.$item->entity_type,$item->id)}}"><i class="bx bx-info-circle me-2" style="color: green;" value="{{$item->id}}"></i> 
                 <a href="{{url('client_entity/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i>
                 </a>
                          {{-- <input type="hidden" ><a href="{{url('viewid?id='.$item->id)}}"></a>--}}
              </a>
                   
-              @endif
+              {{--@endif--}}
 
 
 

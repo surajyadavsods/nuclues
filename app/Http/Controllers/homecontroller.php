@@ -7,11 +7,11 @@ use DB;
 use App\Models\client_group_master;
 use App\Models\client_entity_master;
 use Auth;
+use App\Models\activity;
 use App\Models\User;
 use App\Models\country_compliance__master;
 use App\Models\country;
 use App\Models\role;
-use Carbon\Carbon;
 use Hash;
 use hasfile;
 
@@ -23,19 +23,11 @@ class homecontroller extends Controller
         return view('otp');
     }
 
-    public function dashboad()
+    public function dashboard()
     {
         //$complation_date = manage_complience_information::where('complation_date')
 
-        $id = Auth::user()->id;
-
-        // dd($id);
-
-        // $data['entity'] = manage_complience_information::where('status',"Applicable")->orWhere('csd','=', $id)->orWhere('mat_spv','=', $id)->orWhere('mat_manager','=', $id)->get();
-
-        $data['entity'] =  manage_complience_information::where([['status', '=', 1]])->where(function($q){ $q->where('csd', '=', Auth::user()->id)->orWhere('mat_spv', '=', Auth::user()->id)->orWhere('mat_manager', '=', Auth::user()->id); })->get();
-        $data['info'] =  manage_complience_information::where([['status', '=', 1]])->get();
-
+        $data['entity'] = manage_complience_information::where('status',"Applicable")->get();
         $data['completed'] = manage_complience_information::whereNotNull('complation_date')->get();
         $data['undue'] = manage_complience_information::where('due_date','<=',date('Y-m-d'))->get();
          $data['overdue'] = manage_complience_information::where('due_date','>=',date('Y-m-d'))->get();
@@ -43,45 +35,15 @@ class homecontroller extends Controller
         $data['complience'] = country_compliance__master::where('status','1')->get();
         $data['cliententity'] = client_entity_master::where('status','1')->get();
         $data['delay'] = manage_complience_information::wherenull('complation_date')->orWhere('due_date','<=')->get();
-
-
+        $data['notification'] = activity::latest()->limit(15)->get();
         //dd($data['delay']);
         return view('index',$data);
     }
 
-    public function filter(Request $request)
-    {
-        $id = $request->input('days');
-
-        // dd($id);
-        $startDate = Carbon::today();
-        $endDate = Carbon::today()->addDays($id);
-
-        // $data['entity'] =  manage_complience_information::where([['status', '=', 1]])->where(function($q){ $q->where('csd', '=', Auth::user()->id)->orWhere('mat_spv', '=', Auth::user()->id)->orWhere('mat_manager', '=', Auth::user()->id); })->get();
-        $data['info'] =  manage_complience_information::where([['status', '=', 1]])->whereBetween('due_date',  [$startDate, $endDate])
-        ->get();
-
-        $data['completed'] = manage_complience_information::whereNotNull('complation_date')->get();
-        $data['undue'] = manage_complience_information::where('due_date','<=',date('Y-m-d'))->get();
-         $data['overdue'] = manage_complience_information::where('due_date','>=',date('Y-m-d'))->get();
-        $data['group'] = client_group_master::where('status','1')->get();
-        $data['complience'] = country_compliance__master::where('status','1')->get();
-        $data['cliententity'] = client_entity_master::where('status','1')->get();
-        $data['delay'] = manage_complience_information::wherenull('complation_date')->orWhere('due_date','<=')->get();
-           
-       
-
-
-        // return $data2; die;
-
-        return view('filter', $data);
-    }
-
-
-
     public function reports()
     {
-        return view('backend.report.reports');
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.report.reports',$data);
     }
 
     public function selectyear(Request $request)
@@ -96,6 +58,7 @@ class homecontroller extends Controller
         $data['undue'] = manage_complience_information::where('due_date','<=',date('Y-m-d'))->get();
          $data['overdue'] = manage_complience_information::where('due_date','>=',date('Y-m-d'))->get();
          $data['delay'] = manage_complience_information::wherenull('complation_date')->orWhere('due_date','<=')->get();
+          $data['notification'] = activity::latest()->limit(15)->get();
         $data['entity'] = DB::table('manage_complience_informations')
                   ->whereYear('complation_date',$complation_date)
                   ->get();
@@ -105,7 +68,7 @@ class homecontroller extends Controller
 
     public function selectentity(Request $request)
     {
-        $entity_type = $request->entity_type;
+        $client_entity_name = $request->client_entity_name;
       
         $data['group'] = client_group_master::where('status','1')->get();
         $data['cliententity'] = client_entity_master::where('status','1')->get();
@@ -114,8 +77,9 @@ class homecontroller extends Controller
         $data['undue'] = manage_complience_information::where('due_date','<=',date('Y-m-d'))->get();
          $data['overdue'] = manage_complience_information::where('due_date','>=',date('Y-m-d'))->get();
          $data['delay'] = manage_complience_information::wherenull('complation_date')->orWhere('due_date','<=')->get();
+          $data['notification'] = activity::latest()->limit(15)->get();
         $data['entity'] = DB::table('manage_complience_informations')
-                  ->where('entity_type',$entity_type)
+                  ->where('client_entity_name',$client_entity_name)
                   ->get();
         
         return view('index',$data);
@@ -126,13 +90,15 @@ class homecontroller extends Controller
         $data['country'] = country::all();
         $data['role'] = role::all();
         $data['user'] = User::find(Auth::user()->id);
+         $data['notification'] = activity::latest()->limit(15)->get();
          return view('backend.user.adduser.profile',$data);
     }
     
     public function security()
     {
-        $data = User::find(Auth::user()->id);
-         return view('backend.user.adduser.security',compact('data'));
+        $data['security'] = User::find(Auth::user()->id);
+         $data['notification'] = activity::latest()->limit(15)->get();
+         return view('backend.user.adduser.security',$data);
     }
 
     public function userprofileupdate(Request $request,$id)
@@ -199,5 +165,15 @@ class homecontroller extends Controller
          return view('forgotpass');
     }
     
-   
+   public function notification()
+   {
+     $data['notification'] = activity::latest()->limit(15)->get();
+     return view('import.navbar',$data);
+   }
+
+   public function notification12()
+   {
+     $data['notification'] = activity::latest()->limit(15)->get();
+     return view('import.navbar1',$data);
+   }
 }

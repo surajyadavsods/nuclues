@@ -5,7 +5,7 @@ namespace App\Imports;
 use App\Models\client_group_master;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithheadingRow;
-
+use Auth;
 class Groupimport implements ToModel,WithheadingRow
 {
     /**
@@ -21,7 +21,7 @@ class Groupimport implements ToModel,WithheadingRow
             'contect_phone' => $row['contect_phone'],
             'designation' => $row['designation'],
             'email' => $row['email'],
-            'created' => $row['created'],
+            'created' => Auth::id(),
         ]);
     }
 }

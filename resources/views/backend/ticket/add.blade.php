@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -151,13 +149,8 @@ I
 
             <div class="col-md-6">
                 <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span>Client Entity Name</label>
-                <select id="formValidationSelect2" name="type" class="form-select select2" data-allow-clear="true">
-                    <option>Select Entity Name</option>
-                <option value="Sole Proprietorship">Sole Proprietorship</option>
-                                             <option value="General Proprietorship">General Proprietorship</option>
-                                             <option value="Limited Proprietorship">Limited Proprietorship</option>
-                                             <option value=">LLC">LLC</option>
-                </select>
+                
+                <input type="text" name="type" class="form-control">
             </div>
                
             

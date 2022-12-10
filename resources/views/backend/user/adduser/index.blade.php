@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Users</title>
+    <title>USERS</title>
     
    <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -111,9 +111,6 @@
                               <input type="text" class="form-control" placeholder="Search User by Users" aria-label="Search..." aria-describedby="basic-addon-search31" />
                            </div>
                         </div>
-
-                        @if ($user->role == 0)
-                
                         <div class="col-md-9" style="text-align: end;">
                           <a href="{{url('user/create')}}">
                            <button type="button" class="btn btn-primary">
@@ -121,22 +118,6 @@
                            </button>
                          </a>
                         </div>
-
-                        @elseif($user->permissions[4]->create == 1)
-          
-                        <div class="col-md-9" style="text-align: end;">
-                          <a href="{{url('user/create')}}">
-                           <button type="button" class="btn btn-primary">
-                           <span class="tf-icons bx bx-plus"></span>&nbsp; Add Users
-                           </button>
-                         </a>
-                        </div>
-
-                        @endif
-
-                       
-
-
                      </div>
 
 <!-- Invoice List Table -->
@@ -158,7 +139,7 @@
           </tr>
 </thead>
         <tfoot>
-           @foreach($data as $item) 
+           @foreach($userdetails as $item) 
           <tr>
             <td>
               <div class="form-check">
@@ -183,33 +164,9 @@
                @endif
             </td>
             <td>
-
-              @if ($user->role == 0)
-                
                <a href="{{url('user/'.$item->id.'/edit')}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
 
-              @elseif($user->permissions[4]->update == 1)
-
-              <a href="{{url('user/'.$item->id.'/edit')}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a>
-                  
-              @endif
-
-
-
-              @if ($user->role == 0)
-                
-              <a href="{{url('delete-user/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-              @elseif($user->permissions[4]->delete == 1)
-
-              <a href="{{url('delete-user/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-              @endif
-
-
-
-               {{-- <a href="{{url('user/'.$item->id.'/edit')}}"> <i class="bx bx-edit me-2" style="color: blue;"></i></a> --}}
-
+                <a href="{{url('delete-user/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
 
             <td>
           </tr>

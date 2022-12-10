@@ -191,85 +191,53 @@ Client Entity
                     @csrf
                 <input type="hidden" name="entity_id" value="{{$datas3->id}}"> 
                 <input type="hidden" name="country" value="{{$datas3->country}}">
+                <input type="hidden" name="client_entity_name" value="{{$datas3->client_entity_name}}">
                         <input type="hidden" name="csd" value="{{$datas3->csd}}">
         
                 <input type="hidden" name="mat_spv" value="{{$datas3->mat_spv}}">
         
                 <input type="hidden" name="mat_manager" value="{{$datas3->mat_manager}}">
         
-                  @foreach($check as $item)
+                  @foreach($entity as $item)
                   <tr>
-                   
+                   <input type="hidden" name="country_compliance_id" value="{{$item->id}}">
                     <td><input type="hidden" name="complaince_name" value="{{$item->complaince_name}}">{{$item->complaince_name}}</td>
                     <td><input type="hidden" name="periodend" value="{{$item->periodend}}">{{$item->periodend}}</td>
         
                     <!-- <td>EFG Legal</td> -->
-                    <td><input type="hidden" name="frequency" value="{{$item->frequency}}"><?php $val=App\Models\frequency::where('id',$item->frequency)->first(); echo $val->frequency?></td>
+                    <td><input type="hidden" name="frequency" value="{{$item->Frequency}}"><?php $val=App\Models\frequency::where('id',$item->Frequency)->first(); echo $val->frequency?></td>
                      <td><input type="hidden" name="due_date" value="{{$item->due_date}}">{{$item->due_date}}</td>
                     <td><input type="hidden" name="form" value="{{$item->forms}}">{{$item->forms}}</td>
-                    {{--<td><input type="hidden" name="entity_type" value="{{$item->entity_type}}"><?php $val=App\Models\entitytype::where('id',$item->entity_type)->first(); echo $val->type?></td>--}}
+                    <input type="hidden" name="entity_type" value="{{$item->entity_type}}">
         
-                    {{--<td><input type="hidden" name="form" value="{{$item->forms}}">{{$item->forms}}</td>--}}
+                <input type="hidden" name="form" value="{{$item->forms}}">
                     
-                     {{--<td><input type="hidden" name="group_name" value="{{$item->client_group}}"><?php $val=App\Models\client_group_master::where('id',$item->client_group)->first(); echo $val->client_group?></td>--}}
+                    <input type="hidden" name="group_name" value="{{$item->client_group}}">
         
-                    {{--<td><input type="hidden" name="periodend" value="{{$item->periodend}}">{{$item->periodend}}</td>--}}
-        
+                    <input type="hidden" name="periodend" value="{{$item->periodend}}">
                     <td><input type="hidden" name="notes" value="{{$item->notes}}">{{$item->notes}}</td>
-                    <td>
-                    {{-- @if($datastore->status == NULL)
+<td></td>
+                    {{--<td>
+                    @if($datastore->status == NULL)
                     --
                     @else
-                    <span class="badge rounded-pill bg-label-success">{{ $datastore->status ? "" : $datastore->status }} </span>
-                    @endif</td> --}}
-
-                    <?php $val=App\Models\EntityStatus::where('entity_type', $item->entity_type)->first(); 
-                    
-                    if($item->status == 0) {
-
-                      echo "<span class='badge rounded-pill bg-label-danger'> In Active </span>";
-                     
-                    } else {
-
-                      echo "<span class='badge rounded-pill bg-label-success'> Active </span>";
-
-                    }
-                    
-                    
-                    ?> 
-                    
-                  
-                    
-                  </td>
+                    <span class="badge rounded-pill bg-label-success">{{$datastore->status}} </span>
+                    @endif</td>
+        
+                  </td>--}}
                   {{--    <td><span class="badge rounded-pill bg-label-success">{{$item->status}}</span>--}}
         <td>
                      {{-- <input type="button" name="status" value="Active">Active  --}}
                         {{--<a href="{{url('/activecountry/'.$item->id)}}">--}}
-                         {{--<td> <button type="submit" name="status" value="1"><i class="bx bx-check me-2" style="color: green;"></i></button>--}}
-             </form>
-                          <form action="{{url('cancelentity/'.$item->id)}}" method="POST">
+                     <button type="submit" name="status" value="Non Applicable"><i class="bx bx-x me-2" style="color: red;"></i></button>
+                        <button type="submit" name="status" value="Applicable"><i class="bx bx-check me-2" style="color: green;"></i></button>
+                           </form>
+                          {{--<form action="{{url('cancelentity/'.$item->id)}}" method="POST">
                             @csrf
                             @method('PUT')
-                             
-                            <?php 
-                    
-                            if($item->status == 1) {
-        
-                              echo '<button type="submit" name="status"><i class="bx bx-x me-2" style="color: red;"></i></button>';
-                             
-                            } else {
-        
-                              echo '<button type="submit" name="status"><i class="bx bx-check me-2" style="color: green;"></i></button>';
-        
-                            }
-                            
-                            
-                            ?> 
-
-                                 
-
-                                 
-                         </form>
+                       <button type="submit" name="status" value="Non Applicable"><i class="bx bx-x me-2" style="color: red;"></i></button>
+                        <button type="submit" name="status" value="Applicable"><i class="bx bx-check me-2" style="color: green;"></i></button>
+                         </form>--}}
                           
                   </td>
                   

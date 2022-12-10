@@ -17,10 +17,9 @@ use App\Models\userdetails;
 use App\Imports\entityimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\entityexport;
-use App\Models\BackupRestore;
-use App\Models\EntityStatus;
 //use Maatwebsite\Excel\Facades\Excel;
 use Auth;
+use App\Models\role;
 use DB;
 class client_entitycontroller extends Controller
 {
@@ -31,53 +30,13 @@ class client_entitycontroller extends Controller
      */
     public function index()
     {
-        // $data = client_entity_master::all();
-        $data = client_entity_master::where('hold', 1)->get();
-        return view('backend.masterdata.cliententity.index',compact('data'));
+        $data['entities'] = client_entity_master::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.cliententity.index',$data);
     }
     public function ed()
     {
         return view('backend.masterdata.cliententity.edit');
-    }
-
-
-    public function backup($entity_entity_name , $id)
-    {
-
-        $backup = client_entity_master::find($id);
-
-        // dd($backup);
-
-        $store = BackupRestore::create([
-            'client_group' => $backup->client_group,
-            'entity_name' => $backup->client_entity_name,
-            // 'job_title' => request()->get('job_title'),
-            'date' => date('Y-m-d'),
-            'time' => date('H:i:s'),
-            'restored_by' => Auth::user()->id, 
-            'status' => 1, 
-            
-            // 'updated_by' => 0,
-        ]);
-
-       
-       
-
-        $data = client_entity_master::find($id);
-        $data->Delete();
-
-        $find = client_entity_master::where('client_entity_name', $entity_entity_name)->latest('updated_at')->first();
-
-        $find->hold = 1;
-
-        $find->update();
-
-       
-
-
-
-
-        return redirect('client_entity')->with('status', 'Client Entity Backup Successfully');
     }
 
     /**
@@ -96,6 +55,7 @@ class client_entitycontroller extends Controller
         $data['spv'] = User::where('role',"6")->get();
         //$data['user'] = User::where('role',"0")->get();
         $data['manager'] = User::where('role',"7")->get();
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.masterdata.cliententity.add',$data);
     }
 
@@ -113,22 +73,14 @@ class client_entitycontroller extends Controller
             'country'=> 'required',
             'entity_type'=> 'required',
             'year_end'=> 'required',
-            'status'=> 'required',
             'date'=> 'required',
-            'company_rg_no'=> 'required',
-            'tax_rg_no'=> 'required',
-            'gst_no'=> 'required',
-            'withholding_tax_rg_no'=> 'required',
-            'social_security_no'=> 'required',
-            'anyother_no'=> 'required',
             'csd'=> 'required',
             'mat_manager'=> 'required',
             'mat_spv'=> 'required',
             'affiliate_name'=> 'required',
             'affiliate_email'=> 'required',
             'affiliate_phone'=> 'required',
-            'other_user'=> 'required',
-            'scope_work'=> 'required',
+            
         ],
         [
             'client_group.required' => 'client_group is mandatory',
@@ -136,24 +88,23 @@ class client_entitycontroller extends Controller
             'country.required' => 'country is mandatory',
             'entity_type.required' => 'entity_type is mandatory',
             'year_end.required' => 'year_end is mandatory',
-            'status.required' => 'status is mandatory',
             'date.required' => 'date is mandatory',
-            'company_rg_no.required' => 'company_rg_no is mandatory',
-            'tax_rg_no.required' => 'tax_rg_no is mandatory',
-            'gst_no.required' => 'gst_no is mandatory',
-            'withholding_tax_rg_no.required' => 'withholding_tax_rg_no is mandatory',
-            'social_security_no.required' => 'social_security_no is mandatory',
-            'anyother_no.required' => 'anyother_no is mandatory',
             'csd.required' => 'csd is mandatory',
             'mat_manager.required' => 'mat_manager is mandatory',
             'mat_spv.required' => 'mat_spv is mandatory',
             'affiliate_name.required' => 'affiliate_name is mandatory',
             'affiliate_email.required' => 'affiliate_email is mandatory',
             'affiliate_phone.required' => 'affiliate_phone is mandatory',
-            'other_user.required' => 'other_user is mandatory',
-            'scope_work.required' => 'scope_work is mandatory',
+            
         ]
     );
+
+         $exist = client_entity_master::where('client_entity_name', request()->get('client_entity_name'))->first();
+
+        if ($exist) {
+         return back()->with('status', 'This Client Entity Name Already Exist');
+        } else {
+
         $data = client_entity_master::create([
             
             'client_group'=>request()->get('client_group'),
@@ -176,6 +127,7 @@ class client_entitycontroller extends Controller
             'affiliate_email'=>request()->get('affiliate_email'),
             'affiliate_phone'=>request()->get('affiliate_phone'),
             'responsibility'=>request()->get('responsibility'),
+            'responsibility2'=>request()->get('responsibility2'),
             'other_user'=>request()->get('other_user'),
             'affilate_name2'=>request()->get('affilate_name2'),
             'affilate_phone2'=>request()->get('affilate_phone2'),
@@ -183,6 +135,7 @@ class client_entitycontroller extends Controller
             'scope_work'=>request()->get('scope_work'),
              'created' => Auth::id(),
         ]);
+    }
         //dd($data);
          $activity = activity::create([
             
@@ -227,6 +180,7 @@ class client_entitycontroller extends Controller
         $data['csd'] = User::where('role',"3")->get();
         $data['spv'] = User::where('role',"6")->get();
         $data['manager'] = User::where('role',"7")->get();
+        $data['notification'] = activity::latest()->limit(15)->get();
          return view('backend.masterdata.cliententity.edit',$data);
     }
 
@@ -265,6 +219,7 @@ class client_entitycontroller extends Controller
             $data->other_user = $request->input('other_user');
             $data->scope_work = $request->input('scope_work');
             $data->responsibility = $request->input('responsibility');
+            $data->responsibility2 = $request->input('responsibility2');
             $data->updated = $request->input('updated');
             $data->update();
             
@@ -316,40 +271,22 @@ class client_entitycontroller extends Controller
 
     public function view(Request $request,$id,$id2)
     {
-
-        // dd($id);
-
-        //$candidates = client_entity_master::where('client_entity_masters.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'client_entity_masters.entity_type')->Select('country_compliance__masters.*')->get();
-        //$candidates = client_entity_master::where('entity_type',$request->entity_type)->first();
-
-       //$data['candidate'] = client_entity_master::find($candidates)->with($id);
-
         $data['entity'] = client_entity_master::where('client_entity_masters.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'client_entity_masters.entity_type')->get();
- 
-        $data['check'] = manage_complience_information::where('entity_type', '=', $id)->get();
 
-       $data['group'] = client_entity_master::where('client_entity_masters.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'client_entity_masters.entity_type')->Select('client_entity_masters.*')->join('manage_complience_informations', 'manage_complience_informations.entity_type', '=', 'country_compliance__masters.entity_type')->Select('manage_complience_informations.status')->first();
+
+       //$data['group'] = client_entity_master::where('client_entity_masters.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'client_entity_masters.entity_type')->Select('client_entity_masters.*')->join('manage_complience_informations', 'manage_complience_informations.entity_type', '=', 'country_compliance__masters.entity_type')->Select('manage_complience_informations.status')->first();
 
        //$data['datastore'] = client_entity_master::where('client_entity_masters.id',$request->)->join('manage_complience_informations', 'manage_complience_informations.entity_type', '=', 'client_entity_masters.entity_type')->Select('manage_complience_informations.status,')->first();
 //dd($data['datastore']);
 
-    //    $data['datastore'] = manage_complience_information::where('manage_complience_informations.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'manage_complience_informations.entity_type')->Select('manage_complience_informations.*','country_compliance__masters.id')->first();
-
+       //$data['datastore'] = manage_complience_information::where('manage_complience_informations.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'manage_complience_informations.entity_type')->Select('manage_complience_informations.*','country_compliance__masters.id')->first();
+        //$data['']
         $datas3= client_entity_master::find($id2);
 
         
-
-
-        //$data = client_entity_master::where('client_entity_masters.entity_type',$request->entity_type)->orWhere('client_entity_masters.country',$request->country)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'client_entity_masters.entity_type')->join('country_compliance__masters','country_compliance__masters.country', '=', 'client_entity_masters.country')->Select('client_entity_masters.*','country_compliance__masters.*')->get();
-        //$data = client_entity_master::where('client_entity_masters.entity_type',$request->entity_type)->join('country_compliance__masters', 'country_compliance__masters.entity_type', '=', 'client_entity_masters.entity_type')->where('country_compliance__masters.country',$request->country)->Select('country_compliance__masters.*','client_entity_masters.*')->get();
-        //dd($data);
-
-
+$data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.masterdata.cliententity.view',['datas3' => $datas3],$data);
     }
-
-
-    
 
 
     public function informationstore(Request $request)
@@ -357,17 +294,15 @@ class client_entitycontroller extends Controller
         $input = array(
            'frequency' => $request->frequency,
             'entity_type' => $request->entity_type,
+            'client_entity_name' => $request->client_entity_name,
             'entity_id' => $request->entity_id,
             'due_date' => $request->due_date,
-            // 'country_compliance_id' => $request->country_compliance_id, 
-            
-            'country_compliance_id' => 0, 
-
+            'country_compliance_id' => $request->country_compliance_id,
             'complaince_name' => $request->complaince_name,
              'periodend' => $request->periodend,
               'form' => $request->form,
               'notes' => $request->notes,
-            'status' => 1,
+            'status' => $request->status,
             'group_name' =>$request->group_name,
             'country' => $request->country,
              'csd' => $request->csd,
@@ -397,13 +332,14 @@ class client_entitycontroller extends Controller
 
     public function edit1($id)
     {
-        $data = manage_complience_information::find($id);
-        return view('backend.masterdata.cliententity.editinfo',compact('data'));
+        $data['manage'] = manage_complience_information::find($id);
+         $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.cliententity.editinfo',$data);
 
     }
 
      public function update1(Request $request, $id)
-    {
+     {
         $data = manage_complience_information::find($id);
         $data->extended_date = $request->input('extended_date');
             $data->complation_date = $request->input('complation_date');
@@ -441,20 +377,160 @@ class client_entitycontroller extends Controller
 
     public function createentity()
     {
-        return view('backend.masterdata.cliententity.csv.add');
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.cliententity.csv.add',$data);
     }
 
-    public function importentity()
+    public function importentity(Request $request)
     {
-        Excel::Import(new entityimport, request()->file('file'));
+        //Excel::Import(new entityimport, request()->file('file'));
+        $request->validate([
+            'file' => 'required',
+         
+        ]);
 
-        return redirect('client_entity')->with('status','Country Complaince Imported Successfully');
+
+        $fileName = time().'.'.request()->file->extension();  
+    
+        request()->file->move(public_path('entity'), $fileName);
+
+
+        $file = public_path('entity/'.$fileName);
+
+        $content = file_get_contents('entity/'.$fileName); 
+        $lines = array_map("rtrim", explode("\n", $content));
+
+
+        $arr_file = explode('.', $_FILES['file']['name']);
+        $extension = end($arr_file);
+      
+        if('csv' == $extension) {     
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+          } else if('xls' == $extension) {     
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+          } else     
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        // $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet = $reader->load($file);
+        $d=$spreadsheet->getSheet(0)->toArray();
+
+       
+           $datas = array_slice($d, 1);
+            //  var_dump($datas);
+            //dd($datas);
+             foreach($datas as $firstarray)
+             {
+
+                $cliententity = new client_entity_master();
+
+                $checkgroup = client_group_master::where('client_group',  $firstarray[0])->get();
+                $cliententity->client_group = $checkgroup[0]->id;
+
+                $cliententity->client_entity_name = $firstarray[1];
+
+                $check = country::where('country',  $firstarray[2])->get();
+                $cliententity->country = $check[0]->id;
+               
+                $checkentity = entitytype::where('type',  $firstarray[3])->get();
+                $cliententity->entity_type = $checkentity[0]->id;
+
+                $cliententity->year_end = $firstarray[4];
+                $cliententity->date = $firstarray[5];
+
+                $checkcsd = User::where('name',  $firstarray[6])->get();
+                $cliententity->csd = $checkcsd[0]->id;
+
+                $checkmat = User::where('name',  $firstarray[7])->get();
+                $cliententity->mat_manager = $checkmat[0]->id;
+
+                $mat_spv = User::where('name',  $firstarray[8])->get();
+                $cliententity->mat_spv = $mat_spv[0]->id;
+
+                $cliententity->affiliate_name = $firstarray[9];
+                $cliententity->affiliate_email = $firstarray[10];
+                $cliententity->affiliate_phone = $firstarray[11];
+                $cliententity->responsibility = $firstarray[12];
+                $cliententity->created = Auth::user()->id;
+                $cliententity->save();
+             }
+
+            return redirect()->back()->with('status', 'Excel File Uploaded Successfully'); 
+        //return redirect('')->with('status', 'Client Entity Deleted Successfully');
     }
 
     public function expertentity()
     {
-        return Excel::download(new entityexport, 'entity.xlsx');
+        //return Excel::download(new entityexport, 'entity.xlsx');
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+        ,   'Content-type'        => 'text/xlsx'
+        ,   'Content-Disposition' => 'attachment; filename=entity.xlsx'
+        ,   'Expires'             => '0'
+        ,   'Pragma'              => 'public'
+    ];
+
+    $lists = client_entity_master::all();
+
+    //dd($lists);
+
+    foreach ($lists as $key=> $list) {
+        $check = User::where('id', $list->created)->first();
+        $checkupdate = User::where('id', $list->updated)->first();
+        $checkcsd = role::where('id', $list->csd)->first();
+        $checkmat = role::where('id', $list->mat_manager)->first();
+        $checkspv = role::where('id', $list->mat_spv)->first();
+        $checkgrp = client_group_master::where('id', $list->client_group)->first();
+        $checkentity = entitytype::where('id', $list->entity_type)->first();
+        $checkcountry = country::where('id', $list->country)->first();
+    //dd($check);
+    $data[] = array(
+       
+        
+        "client_group" => empty($checkgrp->client_group)? "" :$checkgrp->client_group,
+        "client_entity_name" => empty($list->client_entity_name)? "" : $list->client_entity_name,
+        "year_end" => empty($list->year_end) ? "" : $list->year_end,
+        "date" => empty($list->date) ? "" : $list->date,
+        "entity_type" => empty($checkentity->entity_type) ? "" : $checkentity->entity_type,
+        "country" => empty($checkcountry->country) ? "" : $checkcountry->country,
+        "company_rg_no" => empty($list->company_rg_no) ? "" : $list->company_rg_no,
+        "tax_rg_no" => empty($list->tax_rg_no)? "" : $list->tax_rg_no,
+        "gst_no" => empty($list->gst_no) ? "" : $list->gst_no, 
+         "withholding_tax_rg_no" => empty($list->withholding_tax_rg_no) ? "" : $list->withholding_tax_rg_no, 
+          "social_security_no" => empty($list->social_security_no) ? "" : $list->social_security_no, 
+           "anyother_no" => empty($list->anyother_no) ? "" : $list->anyother_no,
+           "csd" => empty($checkcsd->role) ? "" : $checkcsd->role, 
+           "mat_manager" => empty($checkmat->role) ? "" : $checkmat->role, 
+           "mat_spv" => empty($checkspv->role) ? "" : $checkspv->role, 
+           "affiliate_name" => empty($list->affiliate_name) ? "" : $list->affiliate_name, 
+           "affiliate_email" => empty($list->affiliate_email) ? "" : $list->affiliate_email, 
+           "affiliate_phone" => empty($list->affiliate_phone) ? "" : $list->affiliate_phone, 
+           "responsibility" => empty($list->responsibility) ? "" : $list->responsibility, 
+
+            "created" => empty($check->name)? "" :$check->name,
+             "updated" => empty($checkupdate->name)? "" :$checkupdate->name,
+       
+      );
+    
     }
+
+
+
+    header("Content-Disposition: attachment; filename=\"entity.xls\"");
+    header("Content-Type: application/vnd.ms-excel;");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    array_unshift($data, array_keys($data[0]));
+    
+    $out = fopen("php://output", 'w');
+    foreach ($data as $data)
+    {
+        fputcsv($out, $data,"\t");
+    }
+    fclose($out);
+    }
+    
     
     public function deletemanage($id)
     {
@@ -484,43 +560,14 @@ class client_entitycontroller extends Controller
     }**/
 
 
-    public function cancelentity(Request $request, $country_compliance_id)
+    public function cancelentity(Request $request,$country_compliance_id)
     {
+        //$id = role_permission::find('country_compliance_id');
 
-        // dd($country_compliance_id);
-
-          $id = $country_compliance_id;
-
-          $check = manage_complience_information::find($id);
-
-        //   dd($check);
-
-        if($check){
-
-            $status = manage_complience_information::find($id);
-
-
-            if($status->status == 0){
-
-                $status->status = 1;
-
-            } else {
-
-                $status->status = 0;
-            }
-
-            $status->update();
-
-    
-        } 
-
-    
-      
-
-        // $data = manage_complience_information::where('country_compliance_id',$country_compliance_id)->first();
-        // $data->status = $request->input('status');
-        // //dd($data);
-        // $data->save();
+        $data = manage_complience_information::where('country_compliance_id',$country_compliance_id)->first();
+        $data->status = $request->input('status');
+        //dd($data);
+        $data->save();
         return redirect()->back();
     }
 

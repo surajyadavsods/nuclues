@@ -121,23 +121,9 @@
                            <div class="col-lg-4 col-md-3" style="width: 100%;">
         <div class="mt-3">
           <!-- Button trigger modal -->
-
-          @if ($user->role == 0)
-                
           <a href="{{route('role.create')}}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal">
             Add Role
           </button></a>
-
-              @elseif($user->permissions[4]->create == 1)
-
-              <a href="{{route('role.create')}}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal">
-                Add Role
-              </button></a>
-                  
-              @endif
-
-
-       
 
          </div>
          </div>
@@ -164,7 +150,7 @@
          
         </thead>
         <tfoot>
-            @foreach($data as $item)
+            @foreach($role as $item)
           <tr>
             <td>
               <div class="form-check">
@@ -181,7 +167,6 @@
                <span class="badge rounded-pill bg-label-danger">In Active</span>
                @endif
             </td>
-            
            <td><?php $val=App\Models\User::where('id',$item->created)->first(); echo $val->name?></td>
             <td>@if($item->updated == Null)
               --
@@ -189,39 +174,10 @@
               <?php $val=App\Models\User::where('id',$item->updated)->first(); echo $val->name?>
               @endif
             </td>
-            <td>
+            <td><a href="{{url('role/'.$item->id.'/edit')}}">
+                <i class="bx bx-edit me-2" style="color: blue;"></i></a>
 
-
-              @if ($user->role == 0)
-                
-              <a href="{{url('role/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
-
-
-              @elseif($user->permissions[4]->update == 1)
-
-              <a href="{{url('role/'.$item->id.'/edit')}}"><i class="bx bx-edit me-2" style="color: blue;"></i></a>
-
-                  
-              @endif
-
-
-
-
-              @if ($user->role == 0)
-                
-              <a href="{{url('delete-role/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-
-              @elseif($user->permissions[4]->delete == 1)
-
-              <a href="{{url('delete-role/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
-
-                  
-              @endif
-
-
-              
-
+                <a href="{{url('delete-role/'.$item->id)}}"><i class="bx bx-trash me-2" style="color: red;"></i></a>
 
             <td>
           </tr>

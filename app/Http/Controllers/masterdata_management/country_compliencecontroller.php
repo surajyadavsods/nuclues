@@ -8,12 +8,12 @@ use App\Models\frequency;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 use App\Models\activity;
 use App\Models\client_entity_master;
 use App\Imports\complienceimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\complienceexport;
-use App\Models\manage_complience_information;
 use DB;
 class country_compliencecontroller extends Controller
 {
@@ -27,6 +27,7 @@ class country_compliencecontroller extends Controller
         $data['country'] = country_compliance__master::all();
         $data['country123'] = country::all();
         $data['type'] = entitytype::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.masterdata.country_complience.index',$data);
     }
 
@@ -42,6 +43,7 @@ class country_compliencecontroller extends Controller
         $data['country'] = country::all();
         $data['frequency'] = frequency::all();
         $data['entitytype'] = entitytype::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.masterdata.country_complience.add',$data);
     }
 
@@ -61,6 +63,7 @@ class country_compliencecontroller extends Controller
             'periodend'=> 'required',
             'complaince_name'=> 'required',
             'notes'=> 'required',
+             'due_date'=> 'required',
         ],
         [
             'country.required'=> 'country is mandatory',
@@ -70,11 +73,19 @@ class country_compliencecontroller extends Controller
             'periodend.required'=> 'period end is mandatory',
             'complaince_name.required'=> 'Complaince name is mandatory',
             'notes.required'=> 'Note is mandatory',
+            'due_date.required'=> 'Due Date is mandatory',
         ]
      );
+
+         //$exist = country_compliance__master::where('complaince_name', request()->get('complaince_name'))->first();
+
+        //if ($exist) {
+         //return back()->with('status', 'This Complaince Name Already Exist');
+        //} else {
+
           
         //  $user = Auth::user()->id;
-        $data2 = country_compliance__master::create([
+        $data = country_compliance__master::create([
             
             'country'=>request()->get('country'),
             'entity_type'=>request()->get('entity_type'),
@@ -83,64 +94,11 @@ class country_compliencecontroller extends Controller
             'periodend'=>request()->get('periodend'),
             'complaince_name'=>request()->get('complaince_name'),
             'notes'=>request()->get('notes'),
-            'due_date'=>request()->input('due_Date'),
+            'due_date'=>request()->get('due_date'),
             'created'=> Auth::id(),
   
         ]);
-
-
-        $id = request()->get('entity_type');
-
-        $data = client_entity_master::where('entity_type', '=', $id)->first();
-
-
-        $main = manage_complience_information::create([
-            
-            'frequency'=>request()->get('Frequency'),
-            'entity_type'=>request()->get('entity_type'),
-            // 'entity_id'=>request()->get('entity_id'),
-            'entity_id'=>  $data->id,
-
-            'country'=>request()->get('country'),
-
-            // 'country_complaince_id'=>request()->get('country_complaince_id'),
-
-            'country_compliance_id'=> $data2->id,
-
-
-            'complaince_name'=>request()->get('complaince_name'),
-
-            'client_entity_name'=>$data->client_entity_name,
-
-            'periodend'=>request()->get('periodend'),
-           
-            'form'=>request()->get('forms'),
-            'notes'=>request()->get('notes'),
-
-            'group_name'=>$data->client_group,
-            'csd'=>$data->csd,
-            'mat_spv'=>$data->mat_spv,
-            'mat_manager'=>$data->mat_manager,
-
-
-            'extended_date'=>request()->get('notes'),
-            'complation_date'=>request()->get('notes'),
-
-
-            'status'=>0,
-
-            'due_date'=>request()->input('due_Date'),
-
-            'created_by'=> Auth::id(),
-            'updated_by'=> 0,
-
-
-
-         
-  
-        ]);
-
-
+    //}
 
          $activity = activity::create([
             
@@ -158,7 +116,7 @@ class country_compliencecontroller extends Controller
   
         ]);
   
-        return redirect('country_complience')->with('status', 'Country Complaince Added Successfully');
+        return redirect('country_compliance')->with('status', 'Country Complaince Added Successfully');
     }
 
     /**
@@ -184,6 +142,7 @@ class country_compliencecontroller extends Controller
         $data['country'] = country::all();
         $data['frequency'] = frequency::all();
         $data['entitytype'] = entitytype::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.masterdata.country_complience.edit',$data);
     }
 
@@ -218,7 +177,7 @@ class country_compliencecontroller extends Controller
             ];
         DB::table('activities')->insert($activitylog);
         
-        return redirect('country_complience')->with('status', 'Country Complaince Updated Successfully');
+        return redirect('country_compliance')->with('status', 'Country Complaince Updated Successfully');
     }
 
     /**
@@ -238,7 +197,7 @@ class country_compliencecontroller extends Controller
         DB::table('activities')->insert($activitylog);
         $data = country_compliance__master::find($id);
         $data->delete();
-        return redirect('country_complience')->with('status','Country Complaince Deleted Successfully');
+        return redirect('country_compliance')->with('status','Country Complaince Deleted Successfully');
     }
 
     public function activecomplience(Request $id,$request)
@@ -260,19 +219,134 @@ class country_compliencecontroller extends Controller
 
     public function createcompliences()
     {
-        return view('backend.masterdata.country_complience.csv.add');
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.masterdata.country_complience.csv.add',$data);
     }
 
-    public function importcompliences()
+    public function importcompliences(Request $request)
     {
-        Excel::Import(new complienceimport, request()->file('file'));
+        //Excel::Import(new complienceimport, request()->file('file'));
 
-        return redirect('country_complience')->with('status','Country Complaince Imported Successfully');
+        //return redirect('coutry_complience')->with('status','Country Complaince Imported Successfully');
+        $request->validate([
+            'file' => 'required',
+         
+        ]);
+
+
+        $fileName = time().'.'.request()->file->extension();  
+    
+        request()->file->move(public_path('Complaince'), $fileName);
+
+
+        $file = public_path('Complaince/'.$fileName);
+
+        $content = file_get_contents('Complaince/'.$fileName); 
+        $lines = array_map("rtrim", explode("\n", $content));
+
+
+        $arr_file = explode('.', $_FILES['file']['name']);
+        $extension = end($arr_file);
+      
+        if('csv' == $extension) {     
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+          } else if('xls' == $extension) {     
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+          } else     
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        // $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet = $reader->load($file);
+        $d=$spreadsheet->getSheet(0)->toArray();
+
+       
+           $datas = array_slice($d, 1);
+            //  var_dump($datas);
+            //dd($datas);
+             foreach($datas as $firstarray){
+
+                $country_compliance = new country_compliance__master();
+
+                $country_compliance->forms = $firstarray[2];
+                //dd($firstarray[2]);
+                $country_compliance->periodend = $firstarray[3];
+                $country_compliance->complaince_name = $firstarray[4];
+                $country_compliance->due_date = $firstarray[7];
+                $country_compliance->notes = $firstarray[5];
+                
+                $check = country::where('country',  $firstarray[0])->get();
+                $country_compliance->country = $check[0]->id;
+                //dd($check);
+                $checkentity = entitytype::where('type',  $firstarray[1])->get();
+                //dd($firstarray[1]);
+                $country_compliance->entity_type = $checkentity[0]->id;
+                //dd($checkentity);
+
+                $checkfrequency = frequency::where('frequency',  $firstarray[6])->get();
+                $country_compliance->Frequency = $checkfrequency[0]->id;
+
+                $country_compliance->created = Auth::user()->id;
+             
+
+                $country_compliance->save();
+             }
+
+            return redirect()->back()->with('status', 'Excel File Uploaded Successfully'); 
+
     }
+
+
 
     public function expertcompliences()
     {
-        return Excel::download(new complienceexport, 'country.xlsx');
+        //return Excel::download(new complienceexport, 'country.xlsx');
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+        ,   'Content-type'        => 'text/xlsx'
+        ,   'Content-Disposition' => 'attachment; filename=compliance.xlsx'
+        ,   'Expires'             => '0'
+        ,   'Pragma'              => 'public'
+    ];
+
+    $lists = country_compliance__master::all();
+    foreach ($lists as $key=> $list) {
+        $check = User::where('id', $list->created)->first();
+        $checkupdate = User::where('id', $list->updated)->first();
+        $checkentity = entitytype::where('id', $list->entity_type)->first();
+        $checkcountry = country::where('id', $list->country)->first();
+        $checkfrequency = frequency::where('id', $list->Frequency)->first();
+    //dd($check);
+    $data[] = array(
+       
+        
+        "entity_type" => empty($checkentity->type) ? "" : $checkentity->type,
+        "country" => empty($checkcountry->country) ? "" : $checkcountry->country,
+        "forms" => empty($list->forms) ? "" : $list->forms,
+        "Frequency" => empty($checkfrequency->frequency)? "" : $checkfrequency->frequency,
+        "periodend" => empty($list->periodend) ? "" : $list->periodend, 
+         "complaince_name" => empty($list->complaince_name) ? "" : $list->complaince_name, 
+          "notes" => empty($list->notes) ? "" : $list->notes, 
+           "due_date" => empty($list->due_date) ? "" : $list->due_date,
+           
+            "created" => empty($check->name)? "" :$check->name,
+             "updated" => empty($checkupdate->name)? "" :$checkupdate->name,
+       
+      );
+    
+    }
+    header("Content-Disposition: attachment; filename=\"compliance.xls\"");
+    header("Content-Type: application/vnd.ms-excel;");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    array_unshift($data, array_keys($data[0]));
+    
+    $out = fopen("php://output", 'w');
+    foreach ($data as $data)
+    {
+        fputcsv($out, $data,"\t");
+    }
+    fclose($out);
     }
 
     public function searchcountry(Request $request)
@@ -282,9 +356,10 @@ class country_compliencecontroller extends Controller
         
         $data['country123'] = country::all();
         $data['type'] = entitytype::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
         $data['country'] = DB::table('country_compliance__masters')
-                  ->where('country', $country12)
-                  ->Orwhere('entity_type', $entity_type)
+                  ->where('entity_type', $entity_type)
+                  ->Orwhere('country', $entity_type)
                   ->get();
         
         return view('backend.masterdata.country_complience.index',$data);

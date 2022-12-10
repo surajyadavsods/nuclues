@@ -20,8 +20,9 @@ class usercontroller extends Controller
      */
     public function index()
     {
-        $data = User::all();
-        return view('backend.user.adduser.index',compact('data'));
+        $data['userdetails'] = User::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.user.adduser.index',$data);
     }
 
     /**
@@ -33,6 +34,7 @@ class usercontroller extends Controller
     {
         $data['role'] = role::all();
          $data['country'] = country::all();
+          $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.user.adduser.add',$data);
     }
 
@@ -49,10 +51,7 @@ class usercontroller extends Controller
        $data = User::create([
             
             'name'=>request()->get('name'),
-            // 'country'=>request()->get('country'),
-
-            'country' => 0,
-
+            //'country'=>request()->get('country'),
             'phone'=>request()->get('phone'),
             'role'=>request()->get('role'),
             'email'=>request()->get('email'),
@@ -103,6 +102,7 @@ class usercontroller extends Controller
         $data['role'] = role::all();
         $data['user'] = User::find($id);
          $data['country'] = country::all();
+          $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.user.adduser.edit',$data);
     }
 
@@ -121,7 +121,7 @@ class usercontroller extends Controller
         $data->name = $request->input('name');
         $data->password = $request->input('password');
         $data->email = $request->input('email');
-        $data->country = $request->input('country'); 
+       // $data->country = $request->input('country'); 
         $data->phone = $request->input('phone');
         $data->status = $request->input('status');
         $data->designation = $request->input('designation');

@@ -17,8 +17,9 @@ class ticketcontroller extends Controller
      */
     public function index()
     {
-        $data = ticket::all();
-        return view('backend.ticket.index',compact('data'));
+        $data['ticket'] = ticket::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.ticket.index',$data);
     }
 
     /**
@@ -29,6 +30,7 @@ class ticketcontroller extends Controller
     public function create()
     {
         $data['group'] = client_group_master::all();
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.ticket.add',$data);
     }
 
@@ -87,6 +89,7 @@ class ticketcontroller extends Controller
     {
         $data['group'] = client_group_master::all();
         $data['ticket'] = ticket::find($id);
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.ticket.edit',$data);
     }
 

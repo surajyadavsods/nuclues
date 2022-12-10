@@ -21,6 +21,7 @@ class country_compliance__master extends Model
         'created',
         'updated',
         'status',
+        'due_date'
     ];
 
     

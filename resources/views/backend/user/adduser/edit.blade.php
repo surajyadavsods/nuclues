@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -206,7 +204,7 @@ I
                                              <option value="0">In Active</option>
                 </select>
             </div>
-            <div class="col-md-3">
+            {{--<div class="col-md-3">
           
 <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span> Country</label>
                 <select id="formValidationSelect2" name="country" class="form-select select2" data-allow-clear="true">
@@ -218,7 +216,7 @@ I
                 </select>
               </div>
 
-       </div>
+       </div>--}}
 
           <div class="col-12 mt-5">
             <button type="submit" name="submitButton" class="btn btn-primary">Save</button>

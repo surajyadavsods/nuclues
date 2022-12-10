@@ -145,25 +145,9 @@
                            <div class="col-lg-4 col-md-3" style="width: 100%;">
         <div class="mt-3">
           <!-- Button trigger modal -->
-
-          @if ($user->role == 0)
-                
           <a href="{{route('role.create')}}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal">
             Add Role
           </button></a>
-
-              @elseif($user->permissions[4]->create == 1)
-
-              <a href="{{route('role.create')}}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#backDropModal">
-                Add Role
-              </button></a>
-
-              @endif
-
-
-          
-
-
 
          </div>
 

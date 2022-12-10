@@ -122,14 +122,14 @@
             <div class="mb-3 col-md-6 form-password-toggle">
               <label class="form-label" for="currentPassword">Current Password</label>
               <div class="input-group input-group-merge">
-                <input class="form-control" type="text" name="password"  value="{{$data->real_password}}" readonly />
+                <input class="form-control" type="text" name="password"  value="{{$security->real_password}}" readonly />
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
               </div>
             </div>
           </div>
           
           <div class="row">
-            <form  method="POST" action="{{url('userpassword/'.$data->id)}}">
+            <form  method="POST" action="{{url('userpassword/'.$security->id)}}">
           @csrf
           @method('PUT')
             <div class="mb-3 col-md-6 form-password-toggle">

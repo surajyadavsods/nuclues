@@ -120,7 +120,7 @@
 </h4>
 </hr>
 
-                      <div class="row">
+                      {{--<div class="row">
                          <div class="col-md-2">
                             <select id="formValidationSelect2" name="formValidationSelect2" class="form-select select2" data-allow-clear="true">
                                              <option value="">Filter</option>
@@ -133,7 +133,7 @@
                                             <option value=""><a href="">Custom Range</a></option>
                                           </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-1">
                            <div class="input-group input-group-merge">
                               <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                               <input type="text" class="form-control" placeholder="Search User by Designation" aria-label="Search..." aria-describedby="basic-addon-search31" />
@@ -141,7 +141,25 @@
                         </div>
                        
                        
-                     </div>
+                     </div>--}}
+                     <form action="{{url('searchactivity')}}" method="get">
+<div class="row">
+ 
+    
+<div class="col-md-2">
+  <input type="date" name="fromDate" class="form-control">
+  </div>
+  <div class="col-md-2">
+  <input type="date" name="toDate" class="form-control">
+  </div>
+   <div class="col-md-1">
+ <button type="search" class="btn btn-primary">search</button>
+  </div>
+ 
+</div>
+
+
+</form>
 
 <!-- Invoice List Table -->
 <div class="card p-3 mt-3">
@@ -163,7 +181,7 @@
          
         </thead>
         <tfoot>
-            @foreach($data as $item)
+            @foreach($activity as $item)
           <tr>
             <td>
               <div class="form-check"><label>{{$item->id}}</label>

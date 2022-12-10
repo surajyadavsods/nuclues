@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-I
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template">
 
@@ -10,7 +8,7 @@ I
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Client Entity </title>
+    <title>Client Group </title>
     
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -109,7 +107,7 @@ I
             
             
 <h4 class="fw-bold py-3 mb-4">
-  Add New Client Group
+  Import Client Group
 </h4>
 
 <nav aria-label="breadcrumb">

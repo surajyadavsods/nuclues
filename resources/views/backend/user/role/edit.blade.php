@@ -132,21 +132,21 @@
       <!-- <h5 class="card-header">FormValidation</h5> -->
       <div class="card-body">  
         <form id="formValidationExamples" class="row g-3" 
-                                  action="{{url('role/'.$data->id)}}" method="POST" enctype="multipart/form-data">
+                                  action="{{url('role/'.$role->id)}}" method="POST" enctype="multipart/form-data">
                                   @csrf
                             @method('PUT')
          <div class="row  mt-2">
 
             <div class="col-md-3">
                 <label class="form-label" for="formValidationName">Name</label>
-                <input type="text" id="formValidationName" class="form-control" placeholder="User Name" name="role" value="{{$data->role}} " />
+                <input type="text" id="formValidationName" class="form-control" placeholder="User Name" name="role" value="{{$role->role}} " />
             </div>
 
             
             <div class="col-md-4">
                <label class="form-label" for="formValidationSelect2"><span class="mandatory">*</span>Status</label>
                 <select id="formValidationSelect2" name="status" class="form-select select2" data-allow-clear="true">
-                  <option value="{{$data->status}}">@if($data->status == 1) 
+                  <option value="{{$role->status}}">@if($role->status == 1) 
                     Active
                     @else
                     In Active

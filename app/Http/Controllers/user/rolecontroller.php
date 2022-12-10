@@ -19,8 +19,9 @@ class rolecontroller extends Controller
      */
     public function index()
     {
-        $data = role::all();
-        return view('backend.user.role.index',compact('data'));
+        $data['role'] = role::all();
+         $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.user.role.index',$data);
     }
 
     /**
@@ -30,7 +31,8 @@ class rolecontroller extends Controller
      */
     public function create()
     {
-        return view('backend.user.role.roladd');
+         $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.user.role.roladd',$data);
     }
 
     /**
@@ -94,8 +96,9 @@ class rolecontroller extends Controller
      */
     public function edit($id)
     {
-        $data = role::find($id);
-        return view('backend.user.role.edit',compact('data'));
+        $data['role'] = role::find($id);
+        $data['notification'] = activity::latest()->limit(15)->get();
+        return view('backend.user.role.edit',$data);
     }
 
     /**
@@ -161,6 +164,7 @@ class rolecontroller extends Controller
     {
         $data['role'] = role::all();
         $data['module'] = module::all();
+         $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.user.role.add',$data);
     }
 
@@ -171,11 +175,12 @@ class rolecontroller extends Controller
 
         $roles = role::all();
         $permissions = role_permission::where('role_id', $id)->get();
-
+        $data['notification'] = activity::latest()->limit(15)->get();
         return view('backend.user.role.modules', [
             'roles' => $roles,
             'permissions' => $permissions,
-        ]);
+
+        ],$data);
 
     }
 
